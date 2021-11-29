@@ -26,13 +26,34 @@ export function renderMoviesList(container, data) {
 
         const movieInfo = document.createElement('div');
         movieInfo.className = 'movie_info';
-        movieInfo.innerHTML = `<button>X</button>
-        <button>X</button>
-        <button>X</button>
-        <button>X</button>
-        ${genres.map(item => item.name)}`;
 
-       
+        const buttonPlay = document.createElement('button');
+        buttonPlay.className = 'button-play';
+
+        const buttonBook = document.createElement('button');
+        buttonBook.className = 'button-book';
+
+        const buttonLike = document.createElement('button');
+        buttonLike.className = 'button-like';
+
+        const buttonDislike = document.createElement('button');
+        buttonDislike.className = 'button-dislike';
+
+        movieInfo.appendChild(buttonPlay);
+        movieInfo.appendChild(buttonBook);
+        movieInfo.appendChild(buttonLike);
+        movieInfo.appendChild(buttonDislike);
+
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'info';
+        infoDiv.innerHTML = `${element.release_date.split('-', 1)} <span class="cat">${element.adut ? 'VM 14' : 'T'}</span>`;
+        movieInfo.appendChild(infoDiv);
+
+        const genresDiv = document.createElement('div');
+        genresDiv.className = 'genres';
+        genresDiv.textContent = genres.map(item => item.name).join(' • ');
+        movieInfo.appendChild(genresDiv);
+
         movieContainer.appendChild(movieInfo);
         wrapper.appendChild(movieContainer);
     });
@@ -54,7 +75,7 @@ export function renderHero(data) {
 
     const desc = document.createElement('div');
     desc.className = 'description';
-    desc.innerHTML = `<h2>${data[heroSelection].overview.split('.', 1)}.</h2>`;
+    desc.innerHTML = `<h2>${data[heroSelection].overview.length > 1 ? data[heroSelection].overview.split('.', 1) + '.' : ''}</h2>`;
 
     const heroButtons = document.createElement('div');
     heroButtons.className = 'hero-buttons';
