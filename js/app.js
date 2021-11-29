@@ -1,6 +1,6 @@
-import { loadPopular } from './apis.js';
+import { loadGenres } from './apis.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadPopular();
+    loadGenres();
 }
 )
