@@ -39,10 +39,15 @@ export function renderMoviesList(container, data) {
         const buttonDislike = document.createElement('button');
         buttonDislike.className = 'button-dislike';
 
+        const buttonDownArrow = document.createElement('button');
+        buttonDownArrow.className = 'button-down-arrow';
+
         movieInfo.appendChild(buttonPlay);
         movieInfo.appendChild(buttonBook);
         movieInfo.appendChild(buttonLike);
         movieInfo.appendChild(buttonDislike);
+
+        movieInfo.appendChild(buttonDownArrow);
 
         const infoDiv = document.createElement('div');
         infoDiv.className = 'info';
@@ -51,7 +56,7 @@ export function renderMoviesList(container, data) {
 
         const genresDiv = document.createElement('div');
         genresDiv.className = 'genres';
-        genresDiv.textContent = genres.map(item => item.name).join(' • ');
+        genresDiv.innerHTML = genres.map(item => item.name).join('<span class="separator"> • </span>');
         movieInfo.appendChild(genresDiv);
 
         movieContainer.appendChild(movieInfo);

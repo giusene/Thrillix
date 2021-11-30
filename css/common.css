@@ -242,15 +242,116 @@ header{
 }
 
 .main__container .cat__row .cat_movies .movie_container .movie_info button{
+    position: relative;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     background-color: #262626;
     color: #fff;
     width: 30px;
     height: 30px;
-    margin-left: 3px;
+    margin-left: 5px;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
+
+.main__container .cat__row .cat_movies .movie_container .movie_info button::after{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: -27px;
+    left: 6px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: rotate(45deg);
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.2s ease;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info button::before{
+    content: '';
+    text-align: center;
+    position: absolute;
+    height: 35px;
+    top: -54px;
+    left: -100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    z-index: -1;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 35px;
+    padding: 0 10px;
+    color: #000;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info button:hover{
+    border: 1px solid #fff;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info button:hover::after{
+    opacity: 1;
+    z-index: 1;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info button:hover::before{
+    opacity: 1;
+    z-index: 2;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-play{
+    border: 1px solid #fff;
+    background-color: #fff;
+    background-image: url(../img/play.png);
+    background-size: cover;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-play::before,
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-play::after{
+    opacity: 0 !important;
+    z-index: -1 !important;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-book::before{
+    content: 'Aggiungi alla mia Lista';
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-like::before{
+    content: 'Mi piace';
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike::before{
+    content: 'Non fa per me';
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-down-arrow::before{
+    content: 'Altre info';
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-book{
+    background-image: url(../img/plus.png);
+    background-size: cover;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-like{
+    background-image: url(../img/like.png);
+    background-size: cover;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike{
+    background-image: url(../img/dislike.png);
+    background-size: cover;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-down-arrow{
+    position: absolute;
+    right: 8px;
+    background-image: url(../img/down-arrow.png);
+    background-size: cover;
+}
+
 
 .main__container .cat__row .cat_movies .movie_container:hover .movie_info{
     display: block;
@@ -266,6 +367,12 @@ header{
 .main__container .cat__row .cat_movies .movie_container:hover .movie_info .info .cat{
     padding: 0px 5px;
     border: 1px solid #fff;
+    margin-left: 5px;
+}
+
+.main__container .cat__row .cat_movies .movie_container:hover .movie_info .genres .separator{
+    color: rgb(97, 97, 97);
+    margin: 0 5px;
 }
 
 
