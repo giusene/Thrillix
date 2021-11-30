@@ -1,19 +1,48 @@
 import { moviesGenres } from './apis.js';
+import { userLogged } from './login.js';
 import { user } from './login.js';
 import { likeList } from './login.js';
-import { userLogged } from './login.js';
+import { bookList } from './login.js';
 
-export function renderMoviesList(container, data) {
+export function renderMoviesList(container, data, myList) {
+    if (myList !== undefined) {
+        const top = document.querySelector(`#top-rated`);
+        top.innerHTML = '';
+        const topTitle = top.parentNode.querySelector('h3');
+        topTitle.textContent = '';
 
+        const now = document.querySelector(`#now-playing`);
+        now.innerHTML = '';
+        const nowTitle = now.parentNode.querySelector('h3');
+        nowTitle.textContent = '';
+
+        const pop = document.querySelector(`#popular`);
+        const popTitle = pop.parentNode.querySelector('h3');
+        popTitle.textContent = 'La mia Lista';
+
+        const hero = document.querySelector('.main__hero');
+        hero.innerHTML = '';
+        const splashImg = document.createElement('img');
+        splashImg.setAttribute('src', './img/splash.png');
+        hero.appendChild(splashImg);
+    } else {
+        const pop = document.querySelector(`#popular`);
+        const popTitle = pop.parentNode.querySelector('h3');
+        popTitle.textContent = 'I piu popolari su Thrillix'; 
+    }
     const wrapper = document.querySelector(`#${container}`);
     wrapper.innerHTML = '';
+    if (data.length < 1) {
+        wrapper.textContent = 'Non hai ancora aggiunto nessun film';
+    }
+
     data.forEach(element => {
         const movieContainer = document.createElement('div');
         movieContainer.className = 'movie_container';
 
         const movieDiv = document.createElement('div');
         movieDiv.className = 'movie_div';
-        movieDiv.style.backgroundImage = `url(${wideImgUrl+element.poster_path})`;
+        movieDiv.style.backgroundImage = `url(${wideImgUrl + element.poster_path})`;
 
         const movieTitle = document.createElement('div');
         movieTitle.className = 'movie_title';
@@ -22,7 +51,7 @@ export function renderMoviesList(container, data) {
 
         movieContainer.appendChild(movieDiv);
 
-        const genres = moviesGenres.genres.filter((genre)=> {
+        const genres = moviesGenres.genres.filter((genre) => {
             if ([...element.genre_ids].filter((gen) => gen === genre.id).length > 0) {
                 return genre.name
             }
@@ -37,11 +66,44 @@ export function renderMoviesList(container, data) {
         const buttonBook = document.createElement('button');
         buttonBook.className = 'button-book';
 
+        bookList.forEach((item) => {
+            if (item.userName === user && item.id === parseInt(element.id)) {
+                buttonBook.classList.add('active');
+            }
+        })
+
+        buttonBook.addEventListener('click', () => {
+            const check = bookList.find((item) => item.userName === user && item.id === element.id);
+            if (check === undefined) {
+                buttonBook.classList.toggle('active');
+                bookList.push({
+                    userName: user,
+                    adult: element.adult,
+                    backdrop_path: element.backdrop_path,
+                    genre_ids: element.genre_ids,
+                    id: element.id,
+                    overview: element.overview,
+                    poster_path: element.poster_path,
+                    release_date: element.release_date,
+                    title: element.title
+                })
+            } else {
+                buttonBook.classList.toggle('active');
+                bookList.splice(bookList.indexOf(check), 1)
+                if (location.hash === '#lamialista') {
+                    renderMoviesList('popular', bookList, true) 
+                }
+            }
+            if (userLogged) {
+                window.localStorage.setItem('bookList', JSON.stringify(bookList));
+            }
+        })
+
         const buttonLike = document.createElement('button');
         const buttonDislike = document.createElement('button');
 
         buttonLike.className = 'button-like';
-    
+
         likeList.forEach((item) => {
             if (item.userName === user && item.movieId === parseInt(element.id) && item.like === true) {
                 buttonLike.classList.add('active');
@@ -63,7 +125,7 @@ export function renderMoviesList(container, data) {
             } else {
                 buttonLike.classList.toggle('active');
                 if (check.like) {
-                    likeList.splice(likeList.indexOf(check), 1) 
+                    likeList.splice(likeList.indexOf(check), 1)
                 } else {
                     buttonDislike.classList.toggle('active');
                     likeList.splice(likeList.indexOf(check), 1)
@@ -75,11 +137,11 @@ export function renderMoviesList(container, data) {
                 }
             }
             if (userLogged) {
-                window.localStorage.setItem('likeList', JSON.stringify(likeList)); 
+                window.localStorage.setItem('likeList', JSON.stringify(likeList));
             }
         })
 
-        
+
         buttonDislike.className = 'button-dislike';
 
         likeList.forEach((item) => {
@@ -103,7 +165,7 @@ export function renderMoviesList(container, data) {
             } else {
                 buttonDislike.classList.toggle('active');
                 if (!check.like) {
-                    likeList.splice(likeList.indexOf(check), 1) 
+                    likeList.splice(likeList.indexOf(check), 1)
                 } else {
                     buttonLike.classList.toggle('active');
                     likeList.splice(likeList.indexOf(check), 1)
@@ -115,14 +177,14 @@ export function renderMoviesList(container, data) {
                 }
             }
             if (userLogged) {
-                window.localStorage.setItem('likeList', JSON.stringify(likeList)); 
-            } 
+                window.localStorage.setItem('likeList', JSON.stringify(likeList));
+            }
         })
 
         const buttonDownArrow = document.createElement('button');
         buttonDownArrow.className = 'button-down-arrow';
 
-        buttonDownArrow.addEventListener('click', ()=> {
+        buttonDownArrow.addEventListener('click', () => {
             movieModal.classList.toggle('show');
             modalWindow.textContent = element.title;
         })
@@ -156,7 +218,7 @@ export function renderHero(data) {
     const heroSection = document.querySelector('.main__hero');
     heroSection.innerHTML = '';
     const heroImg = document.createElement('img');
-    heroImg.setAttribute('src', `${wideImgUrl+data[heroSelection].backdrop_path}`);
+    heroImg.setAttribute('src', `${wideImgUrl + data[heroSelection].backdrop_path}`);
     heroSection.appendChild(heroImg);
 
     const heroContent = document.createElement('div');
