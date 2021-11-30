@@ -1,8 +1,12 @@
-import { moviesGenres } from './apis.js'
+import { moviesGenres } from './apis.js';
+import { user } from './login.js';
+import { likeList } from './login.js';
+import { userLogged } from './login.js';
 
 export function renderMoviesList(container, data) {
-    const wrapper = document.querySelector(`#${container}`)
-    console.log(data)
+
+    const wrapper = document.querySelector(`#${container}`);
+    wrapper.innerHTML = '';
     data.forEach(element => {
         const movieContainer = document.createElement('div');
         movieContainer.className = 'movie_container';
@@ -34,10 +38,86 @@ export function renderMoviesList(container, data) {
         buttonBook.className = 'button-book';
 
         const buttonLike = document.createElement('button');
-        buttonLike.className = 'button-like';
-
         const buttonDislike = document.createElement('button');
+
+        buttonLike.className = 'button-like';
+    
+        likeList.forEach((item) => {
+            if (item.userName === user && item.movieId === parseInt(element.id) && item.like === true) {
+                buttonLike.classList.add('active');
+            }
+        })
+
+        buttonLike.setAttribute('movieId', `${element.id}`)
+        buttonLike.setAttribute('like', true);
+
+        buttonLike.addEventListener('click', () => {
+            const check = likeList.find((item) => item.userName === user && item.movieId === element.id);
+            if (check === undefined) {
+                buttonLike.classList.toggle('active');
+                likeList.push({
+                    userName: user,
+                    movieId: element.id,
+                    like: true
+                })
+            } else {
+                buttonLike.classList.toggle('active');
+                if (check.like) {
+                    likeList.splice(likeList.indexOf(check), 1) 
+                } else {
+                    buttonDislike.classList.toggle('active');
+                    likeList.splice(likeList.indexOf(check), 1)
+                    likeList.push({
+                        userName: user,
+                        movieId: element.id,
+                        like: true
+                    })
+                }
+            }
+            if (userLogged) {
+                window.localStorage.setItem('likeList', JSON.stringify(likeList)); 
+            }
+        })
+
+        
         buttonDislike.className = 'button-dislike';
+
+        likeList.forEach((item) => {
+            if (item.userName === user && item.movieId === parseInt(element.id) && item.like === false) {
+                buttonDislike.classList.add('active');
+            }
+        })
+
+        buttonDislike.setAttribute('movieId', `${element.id}`)
+        buttonDislike.setAttribute('like', false);
+
+        buttonDislike.addEventListener('click', () => {
+            const check = likeList.find((item) => item.userName === user && item.movieId === element.id);
+            if (check === undefined) {
+                buttonDislike.classList.toggle('active');
+                likeList.push({
+                    userName: user,
+                    movieId: element.id,
+                    like: false
+                })
+            } else {
+                buttonDislike.classList.toggle('active');
+                if (!check.like) {
+                    likeList.splice(likeList.indexOf(check), 1) 
+                } else {
+                    buttonLike.classList.toggle('active');
+                    likeList.splice(likeList.indexOf(check), 1)
+                    likeList.push({
+                        userName: user,
+                        movieId: element.id,
+                        like: false
+                    })
+                }
+            }
+            if (userLogged) {
+                window.localStorage.setItem('likeList', JSON.stringify(likeList)); 
+            } 
+        })
 
         const buttonDownArrow = document.createElement('button');
         buttonDownArrow.className = 'button-down-arrow';
@@ -74,11 +154,14 @@ export function renderMoviesList(container, data) {
 export function renderHero(data) {
     const heroSelection = Math.floor(Math.random() * data.length);
     const heroSection = document.querySelector('.main__hero');
+    heroSection.innerHTML = '';
     const heroImg = document.createElement('img');
     heroImg.setAttribute('src', `${wideImgUrl+data[heroSelection].backdrop_path}`);
     heroSection.appendChild(heroImg);
 
-    const heroContent = document.querySelector('.hero__content');
+    const heroContent = document.createElement('div');
+    heroContent.className = 'hero__content';
+    heroSection.appendChild(heroContent);
     const title = document.createElement('div');
     title.className = 'title';
     title.innerHTML = `<h1>${data[heroSelection].title}</h1>`;
