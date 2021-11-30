@@ -1,13 +1,28 @@
-import { loadGenres } from './apis.js'
+import { popularMovies } from './apis.js';
+import { nowPlayingMovies } from './apis.js';
+import { topRatedMovies } from './apis.js';
+import { renderMoviesList } from './render.js';
+import { renderHero } from './render.js';
 
 export function checkUserLogin(userName) {
     if (userLogged) {
         modalLogin.innerHTML = `Bentornato ${userName}!`;
-        loadGenres();
-        likeList = JSON.parse(window.localStorage.getItem('likeList'));
-        console.log(user)
+        if (JSON.parse(window.localStorage.getItem('likeList'))) {
+            likeList = JSON.parse(window.localStorage.getItem('likeList'));
+        } else {
+            likeList = [];
+        }
+        
+        if (JSON.parse(window.localStorage.getItem('bookList'))) {
+            bookList = JSON.parse(window.localStorage.getItem('bookList'));
+        } else {
+            bookList = [];
+        }
+        renderHero(popularMovies);
+        renderMoviesList('popular', popularMovies);
+        renderMoviesList('now-playing', nowPlayingMovies);
+        renderMoviesList('top-rated', topRatedMovies);
     } else {
-        console.log('non loggato')
         loginFunction()
     }
 }
@@ -16,14 +31,12 @@ export function loginFunction() {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         userLogged = true;
+        location.hash = '';
         user = loginForm.querySelector('input').value;
-        checkUserLogin(user);
         if (window.localStorage.getItem('users')) {
             usersList = JSON.parse(window.localStorage.getItem('users'));
             if (usersList.find((userName) => userName === user)) {
-                console.log('utente esistente');
             } else {
-                console.log('nuovo utente');
                 usersList.push(user);
                 window.localStorage.setItem('users', JSON.stringify(usersList));
             }
@@ -31,7 +44,9 @@ export function loginFunction() {
         } else {
             usersList.push(user);
             window.localStorage.setItem('users', JSON.stringify(usersList));
+            window.localStorage.setItem('bookList', JSON.stringify(bookList));
         }
+        checkUserLogin(user);
     })
 }
 
@@ -43,6 +58,7 @@ let usersList = [];
 export let userLogged = false;
 export let user;
 export let likeList = [];
+export let bookList = [];
 
 const loginForm = document.querySelector('#login');
 const modalLogin = document.querySelector('.login-modal');

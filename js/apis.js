@@ -1,5 +1,7 @@
 import { renderMoviesList } from './render.js';
 import { renderHero } from './render.js';
+import { checkUserLogin } from './login.js';
+import { hashCangeFunc } from './domfunctions.js';
 
 export const loadGenres = () => {
     fetch(genresList)
@@ -91,6 +93,8 @@ const LoadTopRated = (pages) => {
                 LoadTopRated(pages);
             } else {
                 renderMoviesList('top-rated', topRatedMovies);
+                checkUserLogin();
+                hashCangeFunc();
             }
         })
 }
@@ -99,9 +103,9 @@ export let moviesGenres = [];
 const genresList = 'https://api.themoviedb.org/3/genre/movie/list?api_key=d81b4c0951683c467d7125a553aefc87&language=it-IT'
 
 
-let popularMovies = [];
-let nowPlayingMovies = [];
-let topRatedMovies = [];
+export let popularMovies = [];
+export let nowPlayingMovies = [];
+export let topRatedMovies = [];
 
 const popularAPI = `https://api.themoviedb.org/3/movie/popular?api_key=d81b4c0951683c467d7125a553aefc87&language=it-IT&page=`;
 const nowPlayingAPI = `https://api.themoviedb.org/3/movie/now_playing?api_key=d81b4c0951683c467d7125a553aefc87&language=it-IT&page=`;

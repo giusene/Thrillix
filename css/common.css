@@ -47,7 +47,7 @@ header{
     background-image: -moz- oldlinear-gradient(top,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
     background-image: -o-linear-gradient(top,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
     background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
-    z-index: 20;
+    z-index: 10;
 }
 
 .header__logo{
@@ -182,7 +182,7 @@ header{
 
 .header__dx .profile-btn:hover .login-modal{
     opacity: 1;
-    z-index: 10;
+    z-index: 20;
 }
 
 
@@ -221,6 +221,7 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: end;
+    z-index: 1;
 }
 
 .main__hero .hero__content .title{
@@ -424,12 +425,21 @@ header{
     content: 'Aggiungi alla mia Lista';
 }
 
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-book.active::before{
+    content: 'Rimuovi dalla mia Lista';
+}
+
 .main__container .cat__row .cat_movies .movie_container .movie_info .button-like::before{
     content: 'Mi piace';
 }
 
 .main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike::before{
     content: 'Non fa per me';
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike.active::before,
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-like.active::before{
+    content: 'Valutato';
 }
 
 .main__container .cat__row .cat_movies .movie_container .movie_info .button-down-arrow::before{
@@ -439,6 +449,10 @@ header{
 .main__container .cat__row .cat_movies .movie_container .movie_info .button-book{
     background-image: url(../img/plus.png);
     background-size: cover;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-book.active{
+    background-image: url(../img/added.png);
 }
 
 .main__container .cat__row .cat_movies .movie_container .movie_info .button-like{
