@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nethrillx - Thriller Movies Database</title>
+    <title>Thrillix - Thriller Movies Database</title>
     <link rel="icon" type="image/png" href="./img/favicon.png"/>
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/fonts.css">
@@ -21,7 +21,21 @@
             <li><a href="#">La mia lista</a></li>
         </ul>
         <div class="header__dx">
-            xxxxx
+            <form id="search" class="search-form">
+                <button id="search-btn" class="search-btn"></button>
+                <input id="search-input" class="search-input" type="text" placeholder="Titolo">
+            </form>
+
+            <div id="profile-btn" class="profile-btn">
+                <div class="login-modal">
+                    <form id="login">
+                        <p>Accedi per salvare i preferiti</p>
+                        <input type="text" value="FakeUser">
+                        <input type="password" value="fakepassword">
+                        <button>Login</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </header>
     <main>
@@ -30,7 +44,7 @@
         </div>
         <div class="main__container">
             <div class="cat__row">
-                <div class="cat__title"><a><h3>I piu popolari su Nethrillx</h3></a></div>
+                <div class="cat__title"><a><h3>I piu popolari su Thrillix</h3></a></div>
                 <div class="cat_movies" id="popular"></div>
             </div>
 
