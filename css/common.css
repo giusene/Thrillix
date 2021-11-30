@@ -47,7 +47,7 @@ header{
     background-image: -moz- oldlinear-gradient(top,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
     background-image: -o-linear-gradient(top,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
     background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
-    z-index: 1;
+    z-index: 20;
 }
 
 .header__logo{
@@ -65,7 +65,7 @@ header{
     list-style: none;
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 0.8em;
 }
 
 .header__menu li{
@@ -80,6 +80,112 @@ header{
 .header__menu li a.active{
     opacity: 1;
 }
+
+.header__dx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__dx .search-form{
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(255, 255, 255, 0);
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.35s ease;
+}
+
+.header__dx .search-form.show{
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid #fff;
+}
+
+.header__dx .search-form .search-input{
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    width: 200px;
+    height: 25px;
+    line-height: 25px;
+    margin-left: 10px;
+    width: 0px;
+}
+
+.header__dx .search-form.show .search-input{
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    width: 200px;
+    height: 25px;
+    line-height: 25px;
+    margin-left: 10px;
+    width: 200px;
+}
+
+.header__dx .search-form .search-btn{
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    border: none;
+    background-image: url(https://img.icons8.com/ios-filled/50/000000/search.png);
+    background-size: cover;
+    filter: invert();
+    cursor: pointer;
+}
+
+.header__dx .profile-btn{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    background-image: url(../img/profile.png);
+    background-size: cover;
+    cursor: pointer;
+}
+
+.header__dx .profile-btn .login-modal{
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    right: -20px;
+    top: 50px;
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    z-index: -10;
+}
+
+
+
+.header__dx .profile-btn::after{
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-color: transparent;
+    background-image: url(https://img.icons8.com/ios-filled/50/000000/sort-up.png);
+    background-size: cover;
+    position: absolute;
+    top: 15px;
+    right: -15px;
+    transform: rotate(180deg);
+    transition: all 0.35s ease;
+    filter: invert();
+}
+
+.header__dx .profile-btn:hover::after{
+    transform: rotate(0deg);
+}
+
+.header__dx .profile-btn:hover .login-modal{
+    opacity: 1;
+    z-index: 10;
+}
+
+
 
 
 /* MAIN SECTION */
@@ -416,6 +522,8 @@ header{
 }
 
 
+
+
 @media screen and (min-width: 1100px) and (max-width: 1399px) {
     .main__container .cat__row .cat_movies .movie_container {
         width: 20%;
@@ -426,11 +534,44 @@ header{
     .main__container .cat__row .cat_movies .movie_container {
         width: 25%;
     }
+
+    .main__hero .hero__content .hero-buttons button {
+        font-size: 0.6rem;
+        padding-left: 0.6rem;
+        padding-right: 0.7rem;
+    }
+
+    .main__hero .hero__content .hero-buttons .hero-info::before {
+        font-size: 0.6rem;
+    }
+
+    .main__hero .hero__content .hero-buttons .hero-play::before {
+        font-size: 1rem;
+    }
 }
 
 @media screen and (min-width: 500px) and (max-width: 799px) {
     .main__container .cat__row .cat_movies .movie_container {
         width: 33.333333%;
+    }
+
+    .main__hero .hero__content {
+        bottom: 25%;
+    }
+
+    .main__hero .hero__content .hero-buttons button {
+        font-size: 0.6rem;
+        padding-left: 0.3rem;
+        padding-right: 0.4rem;
+        line-height: 1.5rem;
+    }
+
+    .main__hero .hero__content .hero-buttons .hero-info::before {
+        font-size: 0.6rem;
+    }
+
+    .main__hero .hero__content .hero-buttons .hero-play::before {
+        font-size: 1rem;
     }
     
 }
@@ -439,5 +580,21 @@ header{
     .main__container .cat__row .cat_movies .movie_container {
         width: 50%;
     }
+
+    .main__hero .hero__content .hero-buttons button {
+        font-size: 0.6rem;
+        padding-left: 0.3rem;
+        padding-right: 0.4rem;
+        line-height: 1.5rem;
+    }
+
+    .main__hero .hero__content .hero-buttons .hero-info::before {
+        font-size: 0.6rem;
+    }
+
+    .main__hero .hero__content .hero-buttons .hero-play::before {
+        font-size: 1rem;
+    }
+
 }
 
