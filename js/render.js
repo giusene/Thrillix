@@ -39,10 +39,20 @@ export function renderMoviesList(container, data) {
         const buttonDislike = document.createElement('button');
         buttonDislike.className = 'button-dislike';
 
+        const buttonDownArrow = document.createElement('button');
+        buttonDownArrow.className = 'button-down-arrow';
+
+        buttonDownArrow.addEventListener('click', ()=> {
+            movieModal.classList.toggle('show');
+            modalWindow.textContent = element.title;
+        })
+
         movieInfo.appendChild(buttonPlay);
         movieInfo.appendChild(buttonBook);
         movieInfo.appendChild(buttonLike);
         movieInfo.appendChild(buttonDislike);
+
+        movieInfo.appendChild(buttonDownArrow);
 
         const infoDiv = document.createElement('div');
         infoDiv.className = 'info';
@@ -51,7 +61,7 @@ export function renderMoviesList(container, data) {
 
         const genresDiv = document.createElement('div');
         genresDiv.className = 'genres';
-        genresDiv.textContent = genres.map(item => item.name).join(' • ');
+        genresDiv.innerHTML = genres.map(item => item.name).join('<span class="separator"> • </span>');
         movieInfo.appendChild(genresDiv);
 
         movieContainer.appendChild(movieInfo);
@@ -97,6 +107,7 @@ export function renderHero(data) {
 }
 
 
-
+const movieModal = document.querySelector('.movie-modal');
+const modalWindow = document.querySelector('.modal-window');
 const verticalImgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
 const wideImgUrl = 'https://www.themoviedb.org/t/p/w1920_and_h1080_multi_faces'
