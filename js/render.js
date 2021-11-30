@@ -42,6 +42,11 @@ export function renderMoviesList(container, data) {
         const buttonDownArrow = document.createElement('button');
         buttonDownArrow.className = 'button-down-arrow';
 
+        buttonDownArrow.addEventListener('click', ()=> {
+            movieModal.classList.toggle('show');
+            modalWindow.textContent = element.title;
+        })
+
         movieInfo.appendChild(buttonPlay);
         movieInfo.appendChild(buttonBook);
         movieInfo.appendChild(buttonLike);
@@ -102,6 +107,7 @@ export function renderHero(data) {
 }
 
 
-
+const movieModal = document.querySelector('.movie-modal');
+const modalWindow = document.querySelector('.modal-window');
 const verticalImgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
 const wideImgUrl = 'https://www.themoviedb.org/t/p/w1920_and_h1080_multi_faces'
