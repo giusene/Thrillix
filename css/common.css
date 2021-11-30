@@ -446,9 +446,17 @@ header{
     background-size: cover;
 }
 
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-like.active{
+    background-image: url(../img/like-active.png);
+}
+
 .main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike{
     background-image: url(../img/dislike.png);
     background-size: cover;
+}
+
+.main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike.active{
+    background-image: url(../img/dislike-active.png);
 }
 
 .main__container .cat__row .cat_movies .movie_container .movie_info .button-down-arrow{
