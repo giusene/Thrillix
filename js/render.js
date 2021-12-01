@@ -44,20 +44,30 @@ export function renderMoviesList(container, data, myList) {
 
     wrapper.style.left = '0px'
 
-    const forwardBtn = document.createElement('div');
-    forwardBtn.className = 'forward-btn';
-    forwardBtn.addEventListener('click', (event) => {
-        slideControll(wrapper, 'forward', event);
-    })
 
-    const backwardBtn = document.createElement('div');
-    backwardBtn.className = 'backward-btn';
-    backwardBtn.addEventListener('click', (event) => {
-        slideControll(wrapper, 'backward', event);
-    })
+    // sarà stanco per non trovare una soluzione migliore
+    if (location.hash === '#lamialista') {
+        
+    } else if (location.hash === '#search') {
 
-    wrapper.parentNode.appendChild(forwardBtn);
-    wrapper.parentNode.appendChild(backwardBtn);
+    } else {
+        const forwardBtn = document.createElement('div');
+        forwardBtn.className = 'forward-btn';
+        forwardBtn.addEventListener('click', (event) => {
+            slideControll(wrapper, 'forward', event);
+        })
+    
+        const backwardBtn = document.createElement('div');
+        backwardBtn.className = 'backward-btn';
+        backwardBtn.addEventListener('click', (event) => {
+            slideControll(wrapper, 'backward', event);
+        })
+    
+        wrapper.parentNode.appendChild(forwardBtn);
+        wrapper.parentNode.appendChild(backwardBtn);
+    }
+
+    
 
     data.forEach(element => {
         const movieContainer = document.createElement('div');
@@ -65,7 +75,7 @@ export function renderMoviesList(container, data, myList) {
 
         const movieDiv = document.createElement('div');
         movieDiv.className = 'movie_div';
-        movieDiv.style.backgroundImage = `url(${wideImgUrl + element.poster_path})`;
+        movieDiv.style.backgroundImage = `url(${smallImgUrl + element.poster_path})`;
 
         const movieTitle = document.createElement('div');
         movieTitle.className = 'movie_title';
@@ -212,6 +222,7 @@ export function renderMoviesList(container, data, myList) {
         buttonDownArrow.className = 'button-down-arrow';
 
         buttonDownArrow.addEventListener('click', () => {
+            window.scrollTo(0, 0);
             showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres);
         })
 
@@ -293,4 +304,5 @@ export function renderHero(data) {
 
 
 const verticalImgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
-const wideImgUrl = 'https://www.themoviedb.org/t/p/w1920_and_h1080_multi_faces'
+const wideImgUrl = 'https://www.themoviedb.org/t/p/w1920_and_h1080_multi_faces';
+const smallImgUrl = 'https://www.themoviedb.org/t/p/w500/'

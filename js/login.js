@@ -42,7 +42,6 @@ export function checkUserLogin(userName) {
 }
 
 export function loginFunction() {
-    console.log(userLogged)
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         userLogged = true;
