@@ -4,6 +4,7 @@ import { user } from './login.js';
 import { likeList } from './login.js';
 import { bookList } from './login.js';
 import { showModal } from './movie-modal.js';
+import { playFunction } from './movie-modal.js';
 import { slideControll } from './domfunctions.js';
 
 export function renderMoviesList(container, data, myList) {
@@ -84,6 +85,10 @@ export function renderMoviesList(container, data, myList) {
 
         const buttonPlay = document.createElement('button');
         buttonPlay.className = 'button-play';
+
+        buttonPlay.addEventListener('click', () => {
+            playFunction();
+        })
 
         const buttonBook = document.createElement('button');
         buttonBook.className = 'button-book';
@@ -267,6 +272,10 @@ export function renderHero(data) {
         if ([...data[heroSelection].genre_ids].filter((gen) => gen === genre.id).length > 0) {
             return genre.name
         }
+    })
+
+    heroPlayBtn.addEventListener('click', () => {
+        playFunction()
     })
 
     heroInfoBtn.addEventListener('click', () => {

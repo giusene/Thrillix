@@ -3,6 +3,7 @@ import { renderHero } from './render.js';
 import { checkUserLogin } from './login.js';
 import { hashCangeFunc } from './domfunctions.js';
 import { searchFunc } from './search.js';
+import { headerScolling } from './domfunctions.js';
 
 export const loadGenres = () => {
     fetch(genresList)
@@ -97,6 +98,7 @@ const LoadTopRated = (pages) => {
                 renderMoviesList('top-rated', topRatedMovies, 'I titoli più votati');
                 checkUserLogin();
                 hashCangeFunc();
+                headerScolling()
             }
         })
 }

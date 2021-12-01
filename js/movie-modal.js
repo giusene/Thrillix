@@ -49,6 +49,41 @@ const youtubeSearch = async (movieTitle, container) => {
     container.innerHTML = youtubeIFrame;
 }
 
+export function playFunction() {
+    const movieModal = document.createElement('div');
+    movieModal.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/LW2x7w3DkzA?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    movieModal.className = 'full-movie-modal';
+
+    const movieOverlay = document.createElement('div');
+    movieOverlay.className = 'full-movie-overlay';
+
+    const movieOverlayBottom = document.createElement('div');
+    movieOverlayBottom.className = 'full-movie-overlay-bottom';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = 'chiudi';
+    movieOverlay.appendChild(closeBtn);
+
+    closeBtn.addEventListener('click', () => {
+        movieModal.innerHTML = '';
+        movieModal.classList.remove('show');
+    })
+
+    movieModal.appendChild(movieOverlay);
+    movieModal.appendChild(movieOverlayBottom);
+    document.body.appendChild(movieModal);
+    movieModal.classList.add('show');
+
+    setTimeout(() => {
+        movieModal.appendChild(movieOverlay);
+        movieOverlay.classList.add('end');
+        movieOverlay.innerHTML = 'Sarebbe stato bellissimo ❤️';
+        setTimeout(() => {
+            movieModal.innerHTML = '';
+            movieModal.classList.remove('show');
+        }, 2000)
+    }, 24500);
+}
 
 const movieModal = document.querySelector('.movie-modal');
 const modalWindow = movieModal.querySelector('.modal-window');

@@ -6,7 +6,21 @@ import { renderHero } from './render.js';
 
 export function checkUserLogin(userName) {
     if (userLogged) {
-        modalLogin.innerHTML = `Bentornato ${userName}!`;
+        modalLogin.innerHTML = `Bentornato <a href="#secret">${userName}</a>!`;
+        const logoutBtn = document.createElement('button');
+        logoutBtn.textContent = 'logout';
+        modalLogin.appendChild(logoutBtn)
+        logoutBtn.addEventListener('click', () => {
+            userLogged = false;
+            modalLogin.innerHTML = `<form id="login">
+            <p>Accedi per salvare i preferiti</p>
+            <input type="text" value="FakeUser" required>
+            <input type="password" value="fakepassword" required>
+            <button type="submit">Login</button>
+        </form>`;
+            loginFunction()
+        }, {once:true})
+
         if (JSON.parse(window.localStorage.getItem('likeList'))) {
             likeList = JSON.parse(window.localStorage.getItem('likeList'));
         } else {
@@ -28,6 +42,7 @@ export function checkUserLogin(userName) {
 }
 
 export function loginFunction() {
+    console.log(userLogged)
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         userLogged = true;
