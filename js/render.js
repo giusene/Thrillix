@@ -46,28 +46,37 @@ export function renderMoviesList(container, data, myList) {
 
 
     // sarà stanco per non trovare una soluzione migliore
-    if (location.hash === '#lamialista') {
+    switch(myList) {
+        case 'La mia lista':
+            if (document.querySelector('.forward-btn')) {
+                document.querySelector('.forward-btn').remove();
+                document.querySelector('.backward-btn').remove();
+            }
+            break;
+        case 'Risulati ricerca':
+            if (document.querySelector('.forward-btn')) {
+                document.querySelector('.forward-btn').remove();
+                document.querySelector('.backward-btn').remove();
+            }
+            break;
+        default:
+            const forwardBtn = document.createElement('div');
+            forwardBtn.className = 'forward-btn';
+            forwardBtn.addEventListener('click', (event) => {
+                slideControll(wrapper, 'forward', event);
+            })
         
-    } else if (location.hash === '#search') {
+            const backwardBtn = document.createElement('div');
+            backwardBtn.className = 'backward-btn';
+            backwardBtn.addEventListener('click', (event) => {
+                slideControll(wrapper, 'backward', event);
+            })
+        
+            wrapper.parentNode.appendChild(forwardBtn);
+            wrapper.parentNode.appendChild(backwardBtn);
+            break;
 
-    } else {
-        const forwardBtn = document.createElement('div');
-        forwardBtn.className = 'forward-btn';
-        forwardBtn.addEventListener('click', (event) => {
-            slideControll(wrapper, 'forward', event);
-        })
-    
-        const backwardBtn = document.createElement('div');
-        backwardBtn.className = 'backward-btn';
-        backwardBtn.addEventListener('click', (event) => {
-            slideControll(wrapper, 'backward', event);
-        })
-    
-        wrapper.parentNode.appendChild(forwardBtn);
-        wrapper.parentNode.appendChild(backwardBtn);
     }
-
-    
 
     data.forEach(element => {
         const movieContainer = document.createElement('div');
