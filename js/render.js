@@ -3,6 +3,7 @@ import { userLogged } from './login.js';
 import { user } from './login.js';
 import { likeList } from './login.js';
 import { bookList } from './login.js';
+import { showModal } from './movie-modal.js';
 
 export function renderMoviesList(container, data, myList) {
     if (myList !== undefined) {
@@ -185,8 +186,7 @@ export function renderMoviesList(container, data, myList) {
         buttonDownArrow.className = 'button-down-arrow';
 
         buttonDownArrow.addEventListener('click', () => {
-            movieModal.classList.toggle('show');
-            modalWindow.textContent = element.title;
+            showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], element.genres);
         })
 
         movieInfo.appendChild(buttonPlay);
@@ -198,7 +198,7 @@ export function renderMoviesList(container, data, myList) {
 
         const infoDiv = document.createElement('div');
         infoDiv.className = 'info';
-        infoDiv.innerHTML = `${element.release_date.split('-', 1)} <span class="cat">${element.adut ? 'VM 14' : 'T'}</span>`;
+        infoDiv.innerHTML = `${element.release_date.split('-', 1)} <span class="cat">${element.adult ? 'VM 14' : 'T'}</span>`;
         movieInfo.appendChild(infoDiv);
 
         const genresDiv = document.createElement('div');
@@ -252,7 +252,5 @@ export function renderHero(data) {
 }
 
 
-const movieModal = document.querySelector('.movie-modal');
-const modalWindow = document.querySelector('.modal-window');
 const verticalImgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
 const wideImgUrl = 'https://www.themoviedb.org/t/p/w1920_and_h1080_multi_faces'
