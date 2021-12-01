@@ -1,5 +1,7 @@
+import { renderMoviesList } from './render.js';
+
 export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieYear, movieGenres) {
-    modalWindow.textContent = '';
+    modalWindow.innerHTML = '';
 
     const closeBtn = document.createElement('button');
     closeBtn.className = 'close-btn';
@@ -27,17 +29,28 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     const desc = document.createElement('p');
     desc.textContent = movieOverview;
 
+    const similar = document.createElement('div')
+    const similarTitle = document.createElement('h3');
+    const similarPrev = document.createElement('div');
+    similarPrev.setAttribute('id', 'similar');
+
+    similar.appendChild(similarTitle);
+    similar.appendChild(similarPrev);
+
     modalContainer.appendChild(title)
     modalContainer.appendChild(genres)
     modalContainer.appendChild(info)
     modalContainer.appendChild(desc)
+    modalContainer.appendChild(similar)
 
-    movieModal.classList.toggle('show');
+    movieModal.classList.add('show');
 
     closeBtn.addEventListener('click', () => {
         modalWindow.textContent = '';
         movieModal.classList.remove('show');
     }, { once: true })
+
+    similarMovies(movieId);
 }
 
 
@@ -84,6 +97,24 @@ export function playFunction() {
         }, 2000)
     }, 24500);
 }
+
+
+
+function similarMovies(movieId) {
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=d81b4c0951683c467d7125a553aefc87&language=it-IT&page=1`)
+        .then((response) => {
+            if (response.status === 404) {
+                console.error('errore!!!');
+                document.querySelector('.alert').classList.add('show')
+            } else {
+                return response.json()
+            }
+        })
+        .then((data) => {
+            renderMoviesList('similar', data.results, 'Altri titoli simili');
+        })
+}
+
 
 const movieModal = document.querySelector('.movie-modal');
 const modalWindow = movieModal.querySelector('.modal-window');

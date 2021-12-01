@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+  }
+
 body {
     font-family: 'NetflixSans', sans-serif;
     background-color: #141414;
@@ -192,6 +196,7 @@ header.display{
 .header__dx .profile-btn .login-modal input{
     display: block;
     margin: 10px auto;
+    padding: 5px 10px;
 }
 
 .header__dx .profile-btn .login-modal button{
@@ -399,7 +404,7 @@ header.display{
     white-space: pre-wrap;
 }
 
-.main__container .cat__row .cat_movies .movie_container{
+.movie_container{
     display: inline-block;
     aspect-ratio: 16/9;
     border-radius: 4px;
@@ -409,14 +414,27 @@ header.display{
     white-space: nowrap;
 }
 
-.main__container .cat__row .cat_movies .movie_container:hover{
+
+#similar .movie_container{
+    width: 32%;
+    margin: 5px;
+}
+
+.movie_container:hover{
     transform: scale(1.5);
     box-shadow: 5px 5px 10px #000;
     z-index: 10;
     position: relative;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_div{
+#similar .movie_container:hover{
+    transform: scale(1.2);
+    box-shadow: 5px 5px 10px #000;
+    z-index: 10;
+    position: relative;
+}
+
+.movie_container .movie_div{
     width: 100%;
     height: 100%;
     border-radius: 4px;
@@ -425,7 +443,7 @@ header.display{
     position: relative;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_div .movie_title{
+.movie_container .movie_div .movie_title{
     font-size: 1.5rem;
     position: absolute;
     font-weight: 600;
@@ -435,12 +453,12 @@ header.display{
     white-space: pre-wrap;
 }
 
-.main__container .cat__row .cat_movies .movie_container:hover .movie_div{
+.movie_container:hover .movie_div{
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info{
+.movie_container .movie_info{
     display: none;
     background-color: #141414;
     border-bottom-left-radius: 4px;
@@ -449,7 +467,7 @@ header.display{
     padding: 15px 8px;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info button{
+.movie_container .movie_info button{
     position: relative;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.4);
@@ -462,7 +480,7 @@ header.display{
     transition: all 0.2s ease;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info button::after{
+.movie_container .movie_info button::after{
     content: '';
     position: absolute;
     width: 15px;
@@ -476,7 +494,7 @@ header.display{
     transition: all 0.2s ease;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info button::before{
+.movie_container .movie_info button::before{
     content: '';
     text-align: center;
     position: absolute;
@@ -495,86 +513,85 @@ header.display{
     color: #000;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info button:hover{
+.movie_container .movie_info button:hover{
     border: 1px solid #fff;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info button:hover::after{
+.movie_container .movie_info button:hover::after{
     opacity: 1;
     z-index: 1;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info button:hover::before{
+.movie_container .movie_info button:hover::before{
     opacity: 1;
     z-index: 2;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-play{
+.movie_container .movie_info .button-play{
     border: 1px solid #fff;
     background-color: #fff;
     background-image: url(../img/play.png);
     background-size: cover;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-play::before,
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-play::after{
+.movie_container .movie_info .button-play::before,
+.movie_container .movie_info .button-play::after{
     opacity: 0 !important;
     z-index: -1 !important;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-book::before{
+.movie_container .movie_info .button-book::before{
     content: 'Aggiungi alla mia Lista';
 }
-
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-book.active::before{
+.movie_container .movie_info .button-book.active::before{
     content: 'Rimuovi dalla mia Lista';
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-like::before{
+.movie_container .movie_info .button-like::before{
     content: 'Mi piace';
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike::before{
+.movie_container .movie_info .button-dislike::before{
     content: 'Non fa per me';
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike.active::before,
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-like.active::before{
+.movie_container .movie_info .button-dislike.active::before,
+.movie_container .movie_info .button-like.active::before{
     content: 'Valutato';
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-down-arrow::before{
+.movie_container .movie_info .button-down-arrow::before{
     content: 'Altre info';
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-book{
+.movie_container .movie_info .button-book{
     background-image: url(../img/plus.png);
     background-size: cover;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-book.active{
+.movie_container .movie_info .button-book.active{
     background-image: url(../img/added.png);
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-like{
+.movie_container .movie_info .button-like{
     background-image: url(../img/like.png);
     background-size: cover;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-like.active{
+.movie_container .movie_info .button-like.active{
     background-image: url(../img/like-active.png);
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike{
+.movie_container .movie_info .button-dislike{
     background-image: url(../img/dislike.png);
     background-size: cover;
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-dislike.active{
+.movie_container .movie_info .button-dislike.active{
     background-image: url(../img/dislike-active.png);
 }
 
-.main__container .cat__row .cat_movies .movie_container .movie_info .button-down-arrow{
+.movie_container .movie_info .button-down-arrow{
     position: absolute;
     right: 8px;
     background-image: url(../img/down-arrow.png);
@@ -582,14 +599,14 @@ header.display{
 }
 
 
-.main__container .cat__row .cat_movies .movie_container:hover .movie_info{
+.movie_container:hover .movie_info{
     display: block;
     position: absolute;
     box-shadow: 5px 5px 10px #000;
     font-size: 10px;
 }
 
-.main__container .cat__row .cat_movies .movie_container:hover .movie_info .info{
+.movie_container:hover .movie_info .info{
     padding: 10px 0;
 }
 
@@ -607,10 +624,10 @@ header.display{
 
 /* MOVIE MODAL */
 .movie-modal{
-    position: fixed;
+    position: absolute;
     width: 100vw;
-    height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
+    padding-top: 5%;
     z-index: -10;
     top: 0;
     display: flex;
