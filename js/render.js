@@ -6,7 +6,7 @@ import { bookList } from './login.js';
 import { showModal } from './movie-modal.js';
 
 export function renderMoviesList(container, data, myList) {
-    if (myList !== undefined) {
+    if (myList === 'La mia lista' | myList === 'Risulati ricerca') {
         const top = document.querySelector(`#top-rated`);
         top.innerHTML = '';
         const topTitle = top.parentNode.querySelector('h3');
@@ -18,20 +18,23 @@ export function renderMoviesList(container, data, myList) {
         nowTitle.textContent = '';
 
         const pop = document.querySelector(`#popular`);
-        const popTitle = pop.parentNode.querySelector('h3');
-        popTitle.textContent = 'La mia Lista';
+        pop.innerHTML = '';
+        pop.classList.add('wrap')
 
         const hero = document.querySelector('.main__hero');
         hero.innerHTML = '';
         const splashImg = document.createElement('img');
-        splashImg.setAttribute('src', './img/splash.png');
+        splashImg.setAttribute('src', './img/blank.png');
         hero.appendChild(splashImg);
     } else {
         const pop = document.querySelector(`#popular`);
-        const popTitle = pop.parentNode.querySelector('h3');
-        popTitle.textContent = 'I piu popolari su Thrillix'; 
+        pop.classList.remove('wrap')
     }
+
     const wrapper = document.querySelector(`#${container}`);
+    const sectionTitle = wrapper.parentNode.querySelector('h3');
+    sectionTitle.textContent = myList;
+
     wrapper.innerHTML = '';
     if (data.length < 1) {
         wrapper.textContent = 'Non hai ancora aggiunto nessun film';
@@ -92,7 +95,7 @@ export function renderMoviesList(container, data, myList) {
                 buttonBook.classList.toggle('active');
                 bookList.splice(bookList.indexOf(check), 1)
                 if (location.hash === '#lamialista') {
-                    renderMoviesList('popular', bookList, true) 
+                    renderMoviesList('popular', bookList, 'La mia lista') 
                 }
             }
             if (userLogged) {

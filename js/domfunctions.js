@@ -7,20 +7,23 @@ import { bookList } from './login.js';
 
 export function hashCangeFunc() {
     window.addEventListener('hashchange', () => {
-        console.log(location.hash)
         switch (location.hash) {
             case '#home':
                 document.querySelector('#home-link').classList.add('active');
                 document.querySelector('#list-link').classList.remove('active');
                 renderHero(popularMovies);
-                renderMoviesList('popular', popularMovies);
-                renderMoviesList('now-playing', nowPlayingMovies);
-                renderMoviesList('top-rated', topRatedMovies);
+                renderMoviesList('popular', popularMovies, 'I più popolari su Thrillix');
+                renderMoviesList('now-playing', nowPlayingMovies, 'I titoli del momento');
+                renderMoviesList('top-rated', topRatedMovies, 'I titoli piu votati');
                 break;
             case '#lamialista':
                 document.querySelector('#home-link').classList.remove('active');
                 document.querySelector('#list-link').classList.add('active');
-                renderMoviesList('popular', bookList, true)
+                renderMoviesList('popular', bookList, 'La mia lista')
+                break;
+            case '#search':
+                document.querySelector('#home-link').classList.remove('active');
+                document.querySelector('#list-link').classList.remove('active');
                 break;
         }
     })
