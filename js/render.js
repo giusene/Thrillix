@@ -4,6 +4,7 @@ import { user } from './login.js';
 import { likeList } from './login.js';
 import { bookList } from './login.js';
 import { showModal } from './movie-modal.js';
+import { slideControll } from './domfunctions.js';
 
 export function renderMoviesList(container, data, myList) {
     if (myList === 'La mia lista' | myList === 'Risulati ricerca') {
@@ -39,6 +40,23 @@ export function renderMoviesList(container, data, myList) {
     if (data.length < 1) {
         wrapper.textContent = 'Non hai ancora aggiunto nessun film';
     }
+
+    wrapper.style.left = '0px'
+
+    const forwardBtn = document.createElement('div');
+    forwardBtn.className = 'forward-btn';
+    forwardBtn.addEventListener('click', (event) => {
+        slideControll(wrapper, 'forward', event);
+    })
+
+    const backwardBtn = document.createElement('div');
+    backwardBtn.className = 'backward-btn';
+    backwardBtn.addEventListener('click', (event) => {
+        slideControll(wrapper, 'backward', event);
+    })
+
+    wrapper.parentNode.appendChild(forwardBtn);
+    wrapper.parentNode.appendChild(backwardBtn);
 
     data.forEach(element => {
         const movieContainer = document.createElement('div');
