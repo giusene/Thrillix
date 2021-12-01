@@ -186,7 +186,7 @@ export function renderMoviesList(container, data, myList) {
         buttonDownArrow.className = 'button-down-arrow';
 
         buttonDownArrow.addEventListener('click', () => {
-            showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], element.genres);
+            showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres);
         })
 
         movieInfo.appendChild(buttonPlay);
@@ -241,6 +241,16 @@ export function renderHero(data) {
     const heroInfoBtn = document.createElement('button');
     heroInfoBtn.className = 'hero-info';
     heroInfoBtn.textContent = 'Altre info';
+
+    const genres = moviesGenres.genres.filter((genre) => {
+        if ([...data[heroSelection].genre_ids].filter((gen) => gen === genre.id).length > 0) {
+            return genre.name
+        }
+    })
+
+    heroInfoBtn.addEventListener('click', () => {
+        showModal(data[heroSelection].title, data[heroSelection].id, data[heroSelection].overview, data[heroSelection].adult, data[heroSelection].release_date.split('-', 1)[0], genres);
+    })
 
     heroButtons.appendChild(heroPlayBtn);
     heroButtons.appendChild(heroInfoBtn);
