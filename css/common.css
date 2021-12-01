@@ -33,6 +33,12 @@ h3{
     margin-bottom: 20px;
 }
 
+h4{
+    font-size: 3vw;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
 /* HEAD SECTION */
 header{
     position: fixed;
@@ -332,6 +338,7 @@ header{
     bottom: 1rem;
     left: 1rem;
     text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+    white-space: pre-wrap;
 }
 
 .main__container .cat__row .cat_movies .movie_container:hover .movie_div{
@@ -492,7 +499,7 @@ header{
     padding: 10px 0;
 }
 
-.main__container .cat__row .cat_movies .movie_container:hover .movie_info .info .cat{
+.cat{
     padding: 0px 5px;
     border: 1px solid #fff;
     margin-left: 5px;
@@ -525,11 +532,40 @@ header{
 }
 
 .movie-modal .modal-window{
-    width: 300px;
-    height: 300px;
+    position: relative;
+    width: 900px;
+    height: auto;
     background-color: #141414;
-
+    border-radius: 10px;
 }
+
+.movie-modal .modal-window .close-btn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background-color: #000;
+    background-image: url(../img/close.png);
+    background-size: cover;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.movie-modal .modal-window .modal-video{
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-image: url(../img/splash.png);
+    background-size: cover;
+}
+
+.movie-modal .modal-window .modal-container{
+    padding: 20px;
+}
+
 
 
 /* FOOTER SECTION */
@@ -570,6 +606,10 @@ header{
     .main__hero .hero__content .hero-buttons .hero-play::before {
         font-size: 1rem;
     }
+
+    .movie-modal .modal-window{
+        width: 750px;
+    }
 }
 
 @media screen and (min-width: 500px) and (max-width: 799px) {
@@ -595,6 +635,10 @@ header{
     .main__hero .hero__content .hero-buttons .hero-play::before {
         font-size: 1rem;
     }
+
+    .movie-modal .modal-window{
+        width: 480px;
+    }
     
 }
 
@@ -616,6 +660,10 @@ header{
 
     .main__hero .hero__content .hero-buttons .hero-play::before {
         font-size: 1rem;
+    }
+
+    .movie-modal .modal-window{
+        width: 90%;
     }
 
 }
