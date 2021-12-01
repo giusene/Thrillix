@@ -39,6 +39,8 @@ h4{
     margin-bottom: 10px;
 }
 
+
+
 /* HEAD SECTION */
 header{
     position: fixed;
@@ -81,9 +83,18 @@ header{
 
 .header__menu li a{
     opacity: 0.8;
+    transition: all 0.35s ease;
+}
+
+.header__menu li a:hover{
+    opacity: 0.5;
 }
 
 .header__menu li a.active{
+    opacity: 1;
+}
+
+.header__menu li a:hover.active{
     opacity: 1;
 }
 
@@ -118,6 +129,7 @@ header{
     line-height: 25px;
     margin-left: 10px;
     width: 0px;
+    transition: all 0.35s ease;
 }
 
 .header__dx .search-form.show .search-input{
@@ -306,6 +318,10 @@ header{
     white-space: nowrap;
 }
 
+.main__container .cat__row .cat_movies.wrap {
+    white-space: pre-wrap;
+}
+
 .main__container .cat__row .cat_movies .movie_container{
     display: inline-block;
     aspect-ratio: 16/9;
@@ -313,6 +329,7 @@ header{
     margin-right: 6px;
     cursor: pointer;
     transition: all 0.35s ease;
+    white-space: nowrap;
 }
 
 .main__container .cat__row .cat_movies .movie_container:hover{

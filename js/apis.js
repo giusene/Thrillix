@@ -2,6 +2,7 @@ import { renderMoviesList } from './render.js';
 import { renderHero } from './render.js';
 import { checkUserLogin } from './login.js';
 import { hashCangeFunc } from './domfunctions.js';
+import { searchFunc } from './search.js';
 
 export const loadGenres = () => {
     fetch(genresList)
@@ -41,8 +42,9 @@ const LoadPopular = (pages) => {
                 pages++;
                 LoadPopular(pages);
             } else {
-                renderMoviesList('popular', popularMovies);
+                renderMoviesList('popular', popularMovies, 'I piu popolari su Thrillix');
                 renderHero(popularMovies);
+                searchFunc(popularMovies);
             }
         })
 }
@@ -67,7 +69,7 @@ const LoadNowPlaying = (pages) => {
                 pages++;
                 LoadNowPlaying(pages);
             } else {
-                renderMoviesList('now-playing', nowPlayingMovies);
+                renderMoviesList('now-playing', nowPlayingMovies, 'I titoli del momento');
             }
         })
 }
@@ -92,7 +94,7 @@ const LoadTopRated = (pages) => {
                 pages++;
                 LoadTopRated(pages);
             } else {
-                renderMoviesList('top-rated', topRatedMovies);
+                renderMoviesList('top-rated', topRatedMovies, 'I titoli più votati');
                 checkUserLogin();
                 hashCangeFunc();
             }
