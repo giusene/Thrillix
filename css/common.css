@@ -304,6 +304,7 @@ header{
 }
 
 .main__container .cat__row {
+    position: relative;
     margin-top: 4rem;
 }
 
@@ -314,8 +315,44 @@ header{
 }
 
 .main__container .cat__row .cat_movies {
+    position: relative;
     padding: 0 0 0 60px;
     white-space: nowrap;
+    transition: all 0.35s ease;
+}
+
+.main__container .cat__row .forward-btn,
+.main__container .cat__row .backward-btn{
+    position: absolute;
+    bottom: 0;
+    width: 4%;
+    height: 78%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    transition: all 0.35s ease;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.main__container .cat__row:hover .forward-btn,
+.main__container .cat__row:hover .backward-btn{
+    opacity: 1;
+}
+
+.main__container .cat__row .backward-btn{
+    background-image: url('../img/backward.png');
+    background-size: contain;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    left: 0;
+}
+
+.main__container .cat__row .forward-btn{
+    background-image: url('../img/forward.png');
+    background-size: contain;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    right: 0;
 }
 
 .main__container .cat__row .cat_movies.wrap {
