@@ -187,6 +187,7 @@ header.display{
     transition: all 0.35s ease;
     text-align: center;
     font-size: 14px;
+    cursor: default;
 }
 
 .header__dx .profile-btn .login-modal p{
@@ -790,6 +791,37 @@ footer a{
 footer a:hover{
      text-decoration: underline;
  }
+
+ .secret {
+     position: fixed;
+     top: 0;
+     width: 100%;
+     height: 100vh;
+     z-index: 999;
+     background-color: #000;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     transition: all 1s ease;
+     opacity: 0;
+     font-size: 16px;
+     line-height: 26px;
+     text-align: center;
+ }
+
+
+ .secret select{
+     display: block;
+     margin: 40px;
+     font-size: 20px;
+     padding: 5px 20px;
+
+}
+
+ .secret.show {
+    opacity: 1;
+}
 
 
 @media screen and (min-width: 1400px) {

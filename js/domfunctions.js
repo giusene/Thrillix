@@ -4,6 +4,9 @@ import { topRatedMovies } from './apis.js';
 import { renderMoviesList } from './render.js';
 import { renderHero } from './render.js';
 import { bookList } from './login.js';
+import { moviesGenres } from './apis.js';
+import { thrillerIdFilter } from './apis.js';
+import { loadGenres } from './apis.js'
 
 export function hashCangeFunc() {
     window.addEventListener('hashchange', () => {
@@ -26,7 +29,7 @@ export function hashCangeFunc() {
                 document.querySelector('#list-link').classList.remove('active');
                 break;
             case '#secret':
-                secretmodal();
+                secretModal()
                 break;
         }
     })
@@ -62,7 +65,24 @@ export function headerScolling() {
 }
 
 function secretModal() {
-
+    const secretDiv = document.createElement('div');
+    secretDiv.className = 'secret';
+    secretDiv.innerHTML = '👽  Complimenti hai trovato un segreto!! 👽<br>Da qui potrai scegliere qualsiasi altro genere';
+    secretDiv.classList.add('show');
+    const select = document.createElement('select');
+    secretDiv.appendChild(select)
+    moviesGenres.genres.forEach(element => {
+        const option = document.createElement('option');
+        option.setAttribute('value', `${element.id}`)
+        option.textContent = `${element.name}`;
+        select.appendChild(option);
+    });
+    document.body.appendChild(secretDiv);
+    select.addEventListener('change', ()=> {
+        thrillerIdFilter = [parseInt(select.value)];
+        secretDiv.classList.remove('show');
+        loadGenres()
+    })
 }
 
 const header = document.querySelector('header');

@@ -35,7 +35,7 @@ const LoadPopular = (pages) => {
         })
         .then((data) => {
             data.results.filter((movie) => {
-                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === thrillerIdFilter).length > 0) {
+                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === thrillerIdFilter[0]).length > 0) {
                     popularMovies.push(movie);
                 }
             })
@@ -62,7 +62,7 @@ const LoadNowPlaying = (pages) => {
         })
         .then((data) => {
             data.results.filter((movie) => {
-                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === thrillerIdFilter).length > 0) {
+                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === thrillerIdFilter[0]).length > 0) {
                     nowPlayingMovies.push(movie);
                 }
             })
@@ -87,7 +87,7 @@ const LoadTopRated = (pages) => {
         })
         .then((data) => {
             data.results.filter((movie) => {
-                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === thrillerIdFilter).length > 0) {
+                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === thrillerIdFilter[0]).length > 0) {
                     topRatedMovies.push(movie);
                 }
             })
@@ -115,4 +115,4 @@ const popularAPI = `https://api.themoviedb.org/3/movie/popular?api_key=d81b4c095
 const nowPlayingAPI = `https://api.themoviedb.org/3/movie/now_playing?api_key=d81b4c0951683c467d7125a553aefc87&language=it-IT&page=`;
 const topRatedAPI = `https://api.themoviedb.org/3/movie/top_rated?api_key=d81b4c0951683c467d7125a553aefc87&language=it-IT&page=`;
 
-const thrillerIdFilter = 53;
+export let thrillerIdFilter = [53];
