@@ -25,6 +25,9 @@ export function hashCangeFunc() {
                 document.querySelector('#home-link').classList.remove('active');
                 document.querySelector('#list-link').classList.remove('active');
                 break;
+            case '#secret':
+                secretmodal();
+                break;
         }
     })
 }
@@ -32,21 +35,35 @@ export function hashCangeFunc() {
 
 export function slideControll(parent, direction, event) {
     let position = parseInt(parent.style.left.slice(0, -2))
-    switch(direction) {
+    switch (direction) {
         case 'backward':
-            if(position < 0) {
-                position+=200;
+            if (position < 0) {
+                position += 200;
                 parent.style.left = `${position}px`
             }
             break;
         case 'forward':
-            if (position > -event.path[1].childNodes[3].childNodes[event.path[1].childNodes[3].childElementCount-1].offsetLeft+(window.innerWidth-(window.innerWidth*15)/100)) {
-                position-=200;
+            if (position > -event.path[1].childNodes[3].childNodes[event.path[1].childNodes[3].childElementCount - 1].offsetLeft + (window.innerWidth - (window.innerWidth * 15) / 100)) {
+                position -= 200;
                 parent.style.left = `${position}px`
             }
-            
-            // console.log(widthCalc.childElementCount)
-            console.log()
             break;
     }
 }
+
+export function headerScolling() {
+    window.onscroll = function (e) {
+        if (e.path[1].pageYOffset !== 0) {
+            header.classList.add('display');
+        } else {
+            header.classList.remove('display');
+        }
+    }
+}
+
+function secretModal() {
+
+}
+
+const header = document.querySelector('header');
+

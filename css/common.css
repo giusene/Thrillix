@@ -56,6 +56,11 @@ header{
     background-image: -o-linear-gradient(top,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
     background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
     z-index: 10;
+    transition: background-color 0.35s ease;
+}
+
+header.display{
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .header__logo{
@@ -168,13 +173,38 @@ header{
 
 .header__dx .profile-btn .login-modal{
     width: 300px;
-    height: 100px;
     position: absolute;
+    padding: 30px 20px 20px 20px;
     right: -20px;
-    top: 50px;
+    top: 40px;
     background-color: rgba(0, 0, 0, 0.9);
     opacity: 0;
-    z-index: -10;
+    max-height: 0px;
+    transition: all 0.35s ease;
+    text-align: center;
+    font-size: 14px;
+}
+
+.header__dx .profile-btn .login-modal p{
+    margin-bottom: 20px;
+}
+
+.header__dx .profile-btn .login-modal input{
+    display: block;
+    margin: 10px auto;
+}
+
+.header__dx .profile-btn .login-modal button{
+    border: none;
+    border-radius: 4px;
+    background-color: #df1600;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 5px 10px;
+    display: block;
+    margin: 10px auto;
+    cursor: pointer;
 }
 
 
@@ -200,7 +230,17 @@ header{
 
 .header__dx .profile-btn:hover .login-modal{
     opacity: 1;
-    z-index: 20;
+    max-height: 500px;
+}
+
+.header__dx .profile-btn .login-modal form{
+    display: none;
+    max-height: 0px;
+}
+
+.header__dx .profile-btn:hover .login-modal form{
+    display: block;
+    max-height: 500px;
 }
 
 
@@ -299,7 +339,7 @@ header{
 
 .main__container{
     position: relative;
-    margin: -16vw 0;
+    margin: -16vw 0 0 0;
     z-index: 2;
 }
 
@@ -645,7 +685,7 @@ header{
 
 
 .movie-modal .modal-window .modal-video iframe{
-    margin-top: -7%;
+    margin-top: -8%;
 }
 
 .movie-modal .modal-window .modal-container{
@@ -660,10 +700,79 @@ header{
     line-height: 25px;
 }
 
+/* MOVIE MODAL */
+.full-movie-modal{
+    position: fixed;
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    transition: all 0.5s ease;
+    top:0;
+}
+
+.full-movie-modal.show{
+    opacity: 1;
+    z-index: 999;
+}
+
+.full-movie-modal .full-movie-overlay{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 7%;
+    text-align: right;
+    padding: 20px 50px;
+    background-color: #000;
+}
+
+.full-movie-modal .full-movie-overlay-bottom{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 7%;
+    text-align: right;
+    padding: 20px 50px;
+    background-color: #000;
+}
+
+
+
+.full-movie-modal .full-movie-overlay.end{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.full-movie-modal .full-movie-overlay button{
+    border: none;
+    border-radius: 4px;
+    background-color: #df1600;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
 
 
 /* FOOTER SECTION */
+footer {
+   text-align: center;
+   padding: 80px;
+   color: #414141;
+   font-size: 12px;
+}
 
+footer a{
+    color: #414141;
+ }
+
+footer a:hover{
+     text-decoration: underline;
+ }
 
 
 @media screen and (min-width: 1400px) {
