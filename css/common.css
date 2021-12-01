@@ -36,7 +36,7 @@ h3{
 h4{
     font-size: 3vw;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* HEAD SECTION */
@@ -505,7 +505,7 @@ header{
     margin-left: 5px;
 }
 
-.main__container .cat__row .cat_movies .movie_container:hover .movie_info .genres .separator{
+.separator{
     color: rgb(97, 97, 97);
     margin: 0 5px;
 }
@@ -537,6 +537,18 @@ header{
     height: auto;
     background-color: #141414;
     border-radius: 10px;
+    transform: scale(0);
+    transition: all 0.5s ease;
+}
+
+
+.movie-modal.show .modal-window{
+    position: relative;
+    width: 900px;
+    height: auto;
+    background-color: #141414;
+    border-radius: 10px;
+    transform: scale(1);
 }
 
 .movie-modal .modal-window .close-btn{
@@ -551,19 +563,47 @@ header{
     border-radius: 50%;
     border: none;
     cursor: pointer;
+    z-index: 1;
 }
 
 
 
 .movie-modal .modal-window .modal-video{
+    position: relative;
     width: 100%;
     aspect-ratio: 16/9;
     background-image: url(../img/splash.png);
     background-size: cover;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.movie-modal .modal-window .modal-video::after{
+    position: absolute;
+    content: '';
+    bottom: 10%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(20,20,20,1) 16%, rgba(20,20,20,0.5746673669467788) 29%, rgba(20,20,20,0) 37%);
+}
+
+
+.movie-modal .modal-window .modal-video iframe{
+    margin-top: -7%;
 }
 
 .movie-modal .modal-window .modal-container{
+    position: relative;
     padding: 20px;
+    margin-top: -15%;
+    z-index: 2;
+}
+
+.movie-modal .modal-window .modal-container p{
+    margin: 10px 0;
+    line-height: 25px;
 }
 
 
