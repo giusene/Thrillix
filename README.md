@@ -11,4 +11,4 @@
 
 >NB: le API di Google hanno richieste giornaliere limitate, quindi è possibile che non venga visualizzato il trailer
 
-### [>>> Live Demo](https://giusene.github.io/la-boutique/)
+### [>>> Live Demo](https://giusene.github.io/Thrillix/)
