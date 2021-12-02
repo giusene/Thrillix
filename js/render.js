@@ -229,8 +229,8 @@ export function renderMoviesList(container, data, myList) {
 
         const buttonDownArrow = document.createElement('button');
         buttonDownArrow.className = 'button-down-arrow';
-
-        if (myList === 'Altri titoli simili') {
+        
+        if (myList === 'Altri titoli simili' || innerWidth > 812 ) {
             buttonDownArrow.addEventListener('click', () => {
                 window.scrollTo(0, 0);
                 showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres, element.backdrop_path, element.poster_path, element.release_date)
