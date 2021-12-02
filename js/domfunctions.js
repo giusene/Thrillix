@@ -12,21 +12,27 @@ export function hashCangeFunc() {
     window.addEventListener('hashchange', () => {
         switch (location.hash) {
             case '#home':
-                document.querySelector('#home-link').classList.add('active');
-                document.querySelector('#list-link').classList.remove('active');
+                document.querySelector('.home-link').classList.add('active');
+                document.querySelector('.ham-home-link').classList.add('active');
+                document.querySelector('.list-link').classList.remove('active');
+                document.querySelector('.ham-list-link').classList.remove('active');
                 renderHero(popularMovies);
                 renderMoviesList('popular', popularMovies, 'I più popolari su Thrillix');
                 renderMoviesList('now-playing', nowPlayingMovies, 'I titoli del momento');
                 renderMoviesList('top-rated', topRatedMovies, 'I titoli piu votati');
                 break;
             case '#lamialista':
-                document.querySelector('#home-link').classList.remove('active');
-                document.querySelector('#list-link').classList.add('active');
+                document.querySelector('.home-link').classList.remove('active');
+                document.querySelector('.ham-home-link').classList.remove('active');
+                document.querySelector('.list-link').classList.add('active');
+                document.querySelector('.ham-list-link').classList.add('active');
                 renderMoviesList('popular', bookList, 'La mia lista')
                 break;
             case '#search':
-                document.querySelector('#home-link').classList.remove('active');
-                document.querySelector('#list-link').classList.remove('active');
+                document.querySelector('.home-link').classList.remove('active');
+                document.querySelector('.ham-home-link').classList.remove('active');
+                document.querySelector('.list-link').classList.remove('active');
+                document.querySelector('.ham-list-link').classList.remove('active');
                 break;
             case '#secret':
                 secretModal()
@@ -97,6 +103,16 @@ function secretModal() {
         
     })
 }
+
+
+export function hamburgerMenu() {
+    const hamburgerBtn = document.querySelector('.hamburger');
+    const hamburgerDiv = document.querySelector('.hamburger-div');
+    hamburgerBtn.addEventListener('click', () => {
+        hamburgerDiv.classList.toggle('show');
+    })
+}
+
 
 export let initFilter = 53;
 const header = document.querySelector('header');

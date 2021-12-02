@@ -4,15 +4,15 @@ import { topRatedMovies } from './apis.js';
 import { renderMoviesList } from './render.js';
 import { renderHero } from './render.js';
 
-export function checkUserLogin(userName) {
+export function checkUserLogin(userName, wrapper) {
     if (userLogged) {
-        modalLogin.innerHTML = `Bentornato <a href="#secret">${user}</a>!`;
+        wrapper.innerHTML = `Bentornato <a href="#secret">${user}</a>!`;
         const logoutBtn = document.createElement('button');
         logoutBtn.textContent = 'logout';
-        modalLogin.appendChild(logoutBtn)
+        wrapper.appendChild(logoutBtn)
         logoutBtn.addEventListener('click', () => {
             userLogged = false;
-            modalLogin.innerHTML = `<form id="login">
+            wrapper.innerHTML = `<form id="login">
             <p>Accedi per salvare i preferiti</p>
             <input type="text" value="FakeUser" required>
             <input type="password" value="fakepassword" required>
@@ -60,7 +60,29 @@ export function loginFunction() {
             window.localStorage.setItem('users', JSON.stringify(usersList));
             window.localStorage.setItem('bookList', JSON.stringify(bookList));
         }
-        checkUserLogin(user);
+        checkUserLogin(user, modalLogin);
+    })
+
+
+    hamburgerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        userLogged = true;
+        location.hash = '';
+        user = loginForm.querySelector('input').value;
+        if (window.localStorage.getItem('users')) {
+            usersList = JSON.parse(window.localStorage.getItem('users'));
+            if (usersList.find((userName) => userName === user)) {
+            } else {
+                usersList.push(user);
+                window.localStorage.setItem('users', JSON.stringify(usersList));
+            }
+
+        } else {
+            usersList.push(user);
+            window.localStorage.setItem('users', JSON.stringify(usersList));
+            window.localStorage.setItem('bookList', JSON.stringify(bookList));
+        }
+        checkUserLogin(user, hamburgerLogin);
     })
 }
 
@@ -75,4 +97,6 @@ export let likeList = [];
 export let bookList = [];
 
 const loginForm = document.querySelector('#login');
+const hamburgerForm = document.querySelector('#login-hamburger');
 const modalLogin = document.querySelector('.login-modal');
+const hamburgerLogin = document.querySelector('.login-hamburger');

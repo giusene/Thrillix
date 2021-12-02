@@ -12,11 +12,11 @@
 </head>
 <body>
     <header>
-        <button class="hamburger">X</button>
+        <button class="hamburger"></button>
         <div class="header__logo"></div>
         <ul class="header__menu">
-            <li><a id="home-link" href="#home" class="active">Home</a></li>
-            <li><a id="list-link" href="#lamialista">La mia lista</a></li>
+            <li><a class="ham-home-link active" href="#home" >Home</a></li>
+            <li><a class="ham-list-link" href="#lamialista">La mia lista</a></li>
         </ul>
         <div class="header__dx">
             <form id="search" class="search-form">
@@ -36,6 +36,20 @@
             </div>
         </div>
     </header>
+    <div class="hamburger-div">
+        <div class="login-hamburger">
+            <form id="login-hamburger">
+                <p>Accedi per salvare i preferiti</p>
+                <input type="text" value="FakeUser" required>
+                <input type="password" value="fakepassword" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <ul class="hamburger__menu">
+            <li><a  href="#home" class="home-link active">Home</a></li>
+            <li><a href="#lamialista" class="list-link" >La mia lista</a></li>
+        </ul>
+    </div>
     <main>
         <div class="main__hero">
             <img src="./img/splash.png" alt="Thrillix - Thriller Movies Database">
