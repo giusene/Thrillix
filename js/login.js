@@ -6,7 +6,7 @@ import { renderHero } from './render.js';
 
 export function checkUserLogin(userName) {
     if (userLogged) {
-        modalLogin.innerHTML = `Bentornato <a href="#secret">${userName}</a>!`;
+        modalLogin.innerHTML = `Bentornato <a href="#secret">${user}</a>!`;
         const logoutBtn = document.createElement('button');
         logoutBtn.textContent = 'logout';
         modalLogin.appendChild(logoutBtn)
@@ -19,23 +19,23 @@ export function checkUserLogin(userName) {
             <button type="submit">Login</button>
         </form>`;
             loginFunction()
-        }, {once:true})
+        }, { once: true })
 
         if (JSON.parse(window.localStorage.getItem('likeList'))) {
             likeList = JSON.parse(window.localStorage.getItem('likeList'));
         } else {
             likeList = [];
         }
-        
+
         if (JSON.parse(window.localStorage.getItem('bookList'))) {
             bookList = JSON.parse(window.localStorage.getItem('bookList'));
         } else {
             bookList = [];
         }
         renderHero(popularMovies);
-        renderMoviesList('popular', popularMovies);
-        renderMoviesList('now-playing', nowPlayingMovies);
-        renderMoviesList('top-rated', topRatedMovies);
+        renderMoviesList('popular', popularMovies, 'I più popolari su Thrillix');
+        renderMoviesList('now-playing', nowPlayingMovies, 'I titoli del momento');
+        renderMoviesList('top-rated', topRatedMovies, 'I titoli piu votati');
     } else {
         loginFunction()
     }
@@ -54,7 +54,7 @@ export function loginFunction() {
                 usersList.push(user);
                 window.localStorage.setItem('users', JSON.stringify(usersList));
             }
-            
+
         } else {
             usersList.push(user);
             window.localStorage.setItem('users', JSON.stringify(usersList));

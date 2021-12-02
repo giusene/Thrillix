@@ -5,8 +5,8 @@ import { renderMoviesList } from './render.js';
 import { renderHero } from './render.js';
 import { bookList } from './login.js';
 import { moviesGenres } from './apis.js';
-import { thrillerIdFilter } from './apis.js';
-import { loadGenres } from './apis.js'
+import { LoadPopular, LoadNowPlaying, LoadTopRated } from './apis.js';
+
 
 export function hashCangeFunc() {
     window.addEventListener('hashchange', () => {
@@ -78,12 +78,20 @@ function secretModal() {
         select.appendChild(option);
     });
     document.body.appendChild(secretDiv);
-    select.addEventListener('change', ()=> {
-        thrillerIdFilter = [parseInt(select.value)];
+    select.addEventListener('change', () => {
+        initFilter = parseInt(select.value);
         secretDiv.classList.remove('show');
-        loadGenres()
+        popularMovies.length = 0;
+        nowPlayingMovies.length = 0;
+        topRatedMovies.length = 0;
+        LoadPopular(1);
+        LoadNowPlaying(1);
+        LoadTopRated(1);
     })
 }
 
+
+
+export let initFilter = 53;
 const header = document.querySelector('header');
 

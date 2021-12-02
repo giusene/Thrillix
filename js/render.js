@@ -8,6 +8,7 @@ import { playFunction } from './movie-modal.js';
 import { slideControll } from './domfunctions.js';
 
 export function renderMoviesList(container, data, myList) {
+    console.log(myList)
     if (myList === 'La mia lista' | myList === 'Risulati ricerca') {
         const top = document.querySelector(`#top-rated`);
         top.innerHTML = '';

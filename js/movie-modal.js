@@ -55,7 +55,7 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
 
 
 const youtubeSearch = async (movieTitle, container) => {
-    const searchQuery = movieTitle.replaceAll(' ', '+') + '+trailer+film';
+    const searchQuery = movieTitle.replaceAll(' ', '+') + '+trailer+film+ita';
     const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&key=AIzaSyDXm7O6AY7HQGSWdWBLmvyMM1RC9D1NHro`);
     const data = await res.json();
     const youtubeIFrame = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${data.items[0].id.videoId}?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`
