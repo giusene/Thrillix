@@ -67,6 +67,13 @@ header.display{
     background-color: rgba(0, 0, 0, 0.9);
 }
 
+.hamburger {
+    display: none;
+    height: 30px;
+    width: 30px;
+    margin: 15px 20px 0 0;
+}
+
 .header__logo{
     width: 92px;
     height: 60px;
@@ -784,7 +791,7 @@ header.display{
 /* FOOTER SECTION */
 footer {
    text-align: center;
-   padding: 80px;
+   padding: 40px;
    color: #414141;
    font-size: 12px;
 }
@@ -949,8 +956,13 @@ footer a:hover{
         font-size: 0.8rem;
     }
 
+    .hamburger {
+        display: block;
+    }
+
     .main__hero .hero__content {
         bottom: 25%;
+        width: 60%;
     }
 
     .main__container .cat__row .cat_movies .movie_container {
@@ -1017,6 +1029,19 @@ footer a:hover{
 
     .main__container .cat__row .cat__title {
         padding: 0 0 0 1rem;
+    }
+
+    .profile-btn, .header__menu {
+        display: none;
+    }
+
+    .header__dx {
+        justify-content: right;
+        flex-grow: 1;
+    }
+
+    .header__dx .search-form.show .search-input {
+        width: 150px;
     }
 
 }
