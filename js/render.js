@@ -232,7 +232,7 @@ export function renderMoviesList(container, data, myList) {
 
         buttonDownArrow.addEventListener('click', () => {
             window.scrollTo(0, 0);
-            showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres);
+            showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres, element.backdrop_path, element.poster_path, element.release_date)
         })
 
         movieInfo.appendChild(buttonPlay);
@@ -299,7 +299,7 @@ export function renderHero(data) {
     })
 
     heroInfoBtn.addEventListener('click', () => {
-        showModal(data[heroSelection].title, data[heroSelection].id, data[heroSelection].overview, data[heroSelection].adult, data[heroSelection].release_date.split('-', 1)[0], genres);
+        showModal(data[heroSelection].title, data[heroSelection].id, data[heroSelection].overview, data[heroSelection].adult, data[heroSelection].release_date.split('-', 1)[0], genres, data[heroSelection].backdrop_path, data[heroSelection].poster_path, data[heroSelection].release_date);
     })
 
     heroButtons.appendChild(heroPlayBtn);

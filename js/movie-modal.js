@@ -1,6 +1,11 @@
 import { renderMoviesList } from './render.js';
+import { userLogged } from './login.js';
+import { user } from './login.js';
+import { likeList } from './login.js';
+import { bookList } from './login.js';
 
-export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieYear, movieGenres) {
+export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieYear, movieGenres, movieBackdrop_path, moviePoster_path, movieRelease_date) {
+    
     modalWindow.innerHTML = '';
 
     const closeBtn = document.createElement('button');
@@ -20,6 +25,143 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     const title = document.createElement('h4');
     title.textContent = movieTitle;
 
+    // da qui
+    const movieInfo = document.createElement('div');
+    movieInfo.className = 'movie_info';
+
+    const buttonPlay = document.createElement('button');
+    buttonPlay.className = 'button-play';
+
+    buttonPlay.addEventListener('click', () => {
+        playFunction();
+    })
+
+    const buttonBook = document.createElement('button');
+    buttonBook.className = 'button-book';
+
+    bookList.forEach((item) => {
+        if (item.userName === user && item.id === parseInt(movieId)) {
+            buttonBook.classList.add('active');
+        }
+    })
+
+    buttonBook.addEventListener('click', () => {
+        const check = bookList.find((item) => item.userName === user && item.id === movieId);
+        if (check === undefined) {
+            buttonBook.classList.toggle('active');
+            bookList.push({
+                userName: user,
+                adult: movieAdult,
+                backdrop_path: movieBackdrop_path,
+                genre_ids: movieGenres,
+                id: movieId,
+                overview: movieOverview,
+                poster_path: moviePoster_path,
+                release_date: movieRelease_date,
+                title: movieTitle
+            })
+        } else {
+            buttonBook.classList.toggle('active');
+            bookList.splice(bookList.indexOf(check), 1)
+            if (location.hash === '#lamialista') {
+                renderMoviesList('popular', bookList, 'La mia lista')
+            }
+        }
+        if (userLogged) {
+            window.localStorage.setItem('bookList', JSON.stringify(bookList));
+        }
+    })
+
+    const buttonLike = document.createElement('button');
+    const buttonDislike = document.createElement('button');
+
+    buttonLike.className = 'button-like';
+
+    likeList.forEach((item) => {
+        if (item.userName === user && item.movieId === parseInt(movieId) && item.like === true) {
+            buttonLike.classList.add('active');
+        }
+    })
+
+    buttonLike.setAttribute('movieId', `${movieId}`)
+    buttonLike.setAttribute('like', true);
+
+    buttonLike.addEventListener('click', () => {
+        const check = likeList.find((item) => item.userName === user && item.movieId === movieId);
+        if (check === undefined) {
+            buttonLike.classList.toggle('active');
+            likeList.push({
+                userName: user,
+                movieId: movieId,
+                like: true
+            })
+        } else {
+            buttonLike.classList.toggle('active');
+            if (check.like) {
+                likeList.splice(likeList.indexOf(check), 1)
+            } else {
+                buttonDislike.classList.toggle('active');
+                likeList.splice(likeList.indexOf(check), 1)
+                likeList.push({
+                    userName: user,
+                    movieId: element.id,
+                    like: true
+                })
+            }
+        }
+        if (userLogged) {
+            window.localStorage.setItem('likeList', JSON.stringify(likeList));
+        }
+    })
+
+
+    buttonDislike.className = 'button-dislike';
+
+    likeList.forEach((item) => {
+        if (item.userName === user && item.movieId === parseInt(element.id) && item.like === false) {
+            buttonDislike.classList.add('active');
+        }
+    })
+
+    buttonDislike.setAttribute('movieId', `${movieId}`)
+    buttonDislike.setAttribute('like', false);
+
+    buttonDislike.addEventListener('click', () => {
+        const check = likeList.find((item) => item.userName === user && item.movieId === movieId);
+        if (check === undefined) {
+            buttonDislike.classList.toggle('active');
+            likeList.push({
+                userName: user,
+                movieId: movieId,
+                like: false
+            })
+        } else {
+            buttonDislike.classList.toggle('active');
+            if (!check.like) {
+                likeList.splice(likeList.indexOf(check), 1)
+            } else {
+                buttonLike.classList.toggle('active');
+                likeList.splice(likeList.indexOf(check), 1)
+                likeList.push({
+                    userName: user,
+                    movieId: element.id,
+                    like: false
+                })
+            }
+        }
+        if (userLogged) {
+            window.localStorage.setItem('likeList', JSON.stringify(likeList));
+        }
+    })
+    // a qui
+    const movieInfoDiv = document.createElement('div');
+    movieInfoDiv.className = 'movie_info_modal';
+
+    movieInfoDiv.appendChild(buttonPlay);
+    movieInfoDiv.appendChild(buttonBook);
+    movieInfoDiv.appendChild(buttonLike);
+    movieInfoDiv.appendChild(buttonDislike);
+
     const info = document.createElement('p');
     info.innerHTML = `${movieYear} <span class="cat">${movieAdult ? 'VM 14' : 'T'}</span>`;
 
@@ -30,6 +172,7 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     desc.textContent = movieOverview;
 
     const similar = document.createElement('div')
+    similar.className = 'modal_similar';
     const similarTitle = document.createElement('h3');
     const similarPrev = document.createElement('div');
     similarPrev.setAttribute('id', 'similar');
@@ -38,6 +181,7 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     similar.appendChild(similarPrev);
 
     modalContainer.appendChild(title)
+    modalContainer.appendChild(movieInfoDiv)
     modalContainer.appendChild(genres)
     modalContainer.appendChild(info)
     modalContainer.appendChild(desc)
