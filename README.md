@@ -9,6 +9,6 @@
 - Responsive
 - Contenuto segreto 👽
 
->NB: le API di Google hanno richieste giornaliere limitate, quindi è possibile che non venga visualizzato il trailer
+>NB: le API di Google hanno richieste giornaliere limitate. In questo caso si visualizzerà un trailer demo.
 
 ### [>>> Live Demo](https://giusene.github.io/Thrillix/)
