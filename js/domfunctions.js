@@ -102,7 +102,7 @@ function secretModal() {
         setTimeout(() => {
             location.hash = '';
             secretDiv.classList.remove('show');
-        }, 5000)
+        }, 8000)
         
     })
 }
