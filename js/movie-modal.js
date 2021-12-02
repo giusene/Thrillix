@@ -202,7 +202,7 @@ const youtubeSearch = (movieTitle, container) => {
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&key=AIzaSyDXm7O6AY7HQGSWdWBLmvyMM1RC9D1NHro`)
         .then((response) => {
             if (response.status === 403) {
-                const youtubeIFrame = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/LW2x7w3DkzA?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`;
+                const youtubeIFrame = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/4hqqFqcr1K8?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`;
                 container.innerHTML = youtubeIFrame;
             } else {
                 return response.json()
