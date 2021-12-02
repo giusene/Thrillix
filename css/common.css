@@ -918,7 +918,7 @@ footer a:hover{
 
     .main__container .cat__row .forward-btn, 
     .main__container .cat__row .backward-btn {
-        width: 8%;
+        display: none;
     }
 
     .movie-modal {
@@ -932,6 +932,15 @@ footer a:hover{
     #similar .movie_container {
         width: 30%;
     }
+
+    .main__container .cat__row .cat_movies {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .main__container .cat__row .cat_movies::-webkit-scrollbar {
+        width: 0px;
+      }
     
 }
 
@@ -982,7 +991,7 @@ footer a:hover{
 
     .main__container .cat__row .forward-btn, 
     .main__container .cat__row .backward-btn {
-        width: 8%;
+        display: none;
     }
 
     .movie-modal {
@@ -995,6 +1004,19 @@ footer a:hover{
 
     #similar .movie_container {
         width: 30%;
+    }
+
+    .main__container .cat__row .cat_movies {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .main__container .cat__row .cat_movies::-webkit-scrollbar {
+        width: 0px;
+      }
+
+    .main__container .cat__row .cat__title {
+        padding: 0 0 0 1rem;
     }
 
 }
