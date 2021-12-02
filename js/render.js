@@ -230,10 +230,19 @@ export function renderMoviesList(container, data, myList) {
         const buttonDownArrow = document.createElement('button');
         buttonDownArrow.className = 'button-down-arrow';
 
-        buttonDownArrow.addEventListener('click', () => {
-            window.scrollTo(0, 0);
-            showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres, element.backdrop_path, element.poster_path, element.release_date)
-        })
+        if (myList === 'Altri titoli simili') {
+            buttonDownArrow.addEventListener('click', () => {
+                window.scrollTo(0, 0);
+                showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres, element.backdrop_path, element.poster_path, element.release_date)
+            })
+        } else {
+            movieContainer.addEventListener('click', () => {
+                window.scrollTo(0, 0);
+                showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres, element.backdrop_path, element.poster_path, element.release_date)
+            })
+        }
+
+        
 
         movieInfo.appendChild(buttonPlay);
         movieInfo.appendChild(buttonBook);

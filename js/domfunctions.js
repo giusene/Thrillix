@@ -12,6 +12,7 @@ export function hashCangeFunc() {
     window.addEventListener('hashchange', () => {
         switch (location.hash) {
             case '#home':
+                document.querySelector('.hamburger-div').classList.remove('show');
                 document.querySelector('.home-link').classList.add('active');
                 document.querySelector('.ham-home-link').classList.add('active');
                 document.querySelector('.list-link').classList.remove('active');
@@ -22,6 +23,7 @@ export function hashCangeFunc() {
                 renderMoviesList('top-rated', topRatedMovies, 'I titoli piu votati');
                 break;
             case '#lamialista':
+                document.querySelector('.hamburger-div').classList.remove('show');
                 document.querySelector('.home-link').classList.remove('active');
                 document.querySelector('.ham-home-link').classList.remove('active');
                 document.querySelector('.list-link').classList.add('active');
@@ -29,6 +31,7 @@ export function hashCangeFunc() {
                 renderMoviesList('popular', bookList, 'La mia lista')
                 break;
             case '#search':
+                document.querySelector('.hamburger-div').classList.remove('show');
                 document.querySelector('.home-link').classList.remove('active');
                 document.querySelector('.ham-home-link').classList.remove('active');
                 document.querySelector('.list-link').classList.remove('active');
