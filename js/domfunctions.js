@@ -65,8 +65,7 @@ export function headerScolling() {
 }
 
 function secretModal() {
-    const secretDiv = document.createElement('div');
-    secretDiv.className = 'secret';
+    const secretDiv = document.querySelector('.secret');
     secretDiv.innerHTML = '👽  Complimenti hai trovato un segreto!! 👽<br>Da qui potrai scegliere qualsiasi altro genere';
     secretDiv.classList.add('show');
     const select = document.createElement('select');
@@ -80,17 +79,24 @@ function secretModal() {
     document.body.appendChild(secretDiv);
     select.addEventListener('change', () => {
         initFilter = parseInt(select.value);
-        secretDiv.classList.remove('show');
         popularMovies.length = 0;
         nowPlayingMovies.length = 0;
         topRatedMovies.length = 0;
         LoadPopular(1);
         LoadNowPlaying(1);
         LoadTopRated(1);
+        secretDiv.textContent = '';
+        const loader = document.createElement('img');
+        loader.setAttribute('src', './img/loading.gif');
+        secretDiv.appendChild(loader);
+        select.remove()
+        setTimeout(() => {
+            location.hash = '';
+            secretDiv.classList.remove('show');
+        }, 5000)
+        
     })
 }
-
-
 
 export let initFilter = 53;
 const header = document.querySelector('header');
