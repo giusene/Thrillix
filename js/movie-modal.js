@@ -5,7 +5,7 @@ import { likeList } from './login.js';
 import { bookList } from './login.js';
 
 export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieYear, movieGenres, movieBackdrop_path, moviePoster_path, movieRelease_date) {
-    
+
     modalWindow.innerHTML = '';
 
     const closeBtn = document.createElement('button');
@@ -197,13 +197,30 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     similarMovies(movieId);
 }
 
-const youtubeSearch = async (movieTitle, container) => {
+const youtubeSearch = (movieTitle, container) => {
     const searchQuery = movieTitle.replaceAll(' ', '+') + '+trailer+film+ita';
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&key=AIzaSyDXm7O6AY7HQGSWdWBLmvyMM1RC9D1NHro`);
-    const data = await res.json();
-    const youtubeIFrame = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${data.items[0].id.videoId}?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`
-    container.innerHTML = youtubeIFrame;
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&key=AIzaSyDXm7O6AY7HQGSWdWBLmvyMM1RC9D1NHro`)
+        .then((response) => {
+            if (response.status === 403) {
+                const youtubeIFrame = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/LW2x7w3DkzA?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`;
+                container.innerHTML = youtubeIFrame;
+            } else {
+                return response.json()
+            }
+        })
+        .then((data) => {
+            const youtubeIFrame = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${data.items[0].id.videoId}?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`;
+            container.innerHTML = youtubeIFrame;
+        })
 }
+
+// const youtubeSearch = async (movieTitle, container) => {
+//     const searchQuery = movieTitle.replaceAll(' ', '+') + '+trailer+film+ita';
+//     const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&key=AIzaSyDXm7O6AY7HQGSWdWBLmvyMM1RC9D1NHro`);
+//     const data = await res.json();
+//     const youtubeIFrame = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${data.items[0].id.videoId}?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`
+//     container.innerHTML = youtubeIFrame;
+// }
 
 
 
