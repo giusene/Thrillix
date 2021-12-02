@@ -4,7 +4,8 @@ import { checkUserLogin } from './login.js';
 import { hashCangeFunc } from './domfunctions.js';
 import { searchFunc } from './search.js';
 import { headerScolling } from './domfunctions.js';
-import { initFilter } from './domfunctions.js'
+import { initFilter } from './domfunctions.js';
+import { hamburgerMenu } from './domfunctions.js';
 
 
 
@@ -101,7 +102,8 @@ export const LoadTopRated = (pages) => {
                 renderMoviesList('top-rated', topRatedMovies, 'I titoli più votati');
                 checkUserLogin();
                 hashCangeFunc();
-                headerScolling()
+                headerScolling();
+                hamburgerMenu();
             }
         })
 }
