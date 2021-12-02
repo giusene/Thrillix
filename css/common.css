@@ -990,11 +990,23 @@ footer {
 
 footer a{
     color: #414141;
+    transition: all 0.35s ease;
  }
 
 footer a:hover{
      text-decoration: underline;
+     color: #fff;
  }
+
+footer img{
+    filter: invert(0.2);
+    cursor: pointer;
+    transition: all 0.35s ease;
+}
+
+footer img:hover{
+    filter: invert(1);
+}
 
  .secret {
      position: absolute;
