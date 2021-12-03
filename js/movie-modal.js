@@ -33,6 +33,8 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     buttonPlay.className = 'button-play';
 
     buttonPlay.addEventListener('click', () => {
+        modalWindow.textContent = '';
+        movieModal.classList.remove('show');
         playFunction();
     })
 

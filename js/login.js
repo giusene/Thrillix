@@ -6,11 +6,13 @@ import { renderHero } from './render.js';
 
 export function checkUserLogin(userName, wrapper) {
     if (userLogged) {
+        location.hash = '#login';
         wrapper.innerHTML = `Bentornato <a href="#secret">${user}</a>!`;
         const logoutBtn = document.createElement('button');
         logoutBtn.textContent = 'logout';
-        wrapper.appendChild(logoutBtn)
+        wrapper.appendChild(logoutBtn);
         logoutBtn.addEventListener('click', () => {
+            location.hash = '#logout';
             userLogged = false;
             wrapper.innerHTML = `<form id="login">
             <p>Accedi per salvare i preferiti</p>
@@ -18,8 +20,10 @@ export function checkUserLogin(userName, wrapper) {
             <input type="password" value="fakepassword" required>
             <button type="submit">Login</button>
         </form>`;
-            loginFunction()
-        }, { once: true })
+            loginFunction();
+            likeList = [];
+            bookList = [];
+        })
 
         if (JSON.parse(window.localStorage.getItem('likeList'))) {
             likeList = JSON.parse(window.localStorage.getItem('likeList'));
@@ -39,10 +43,13 @@ export function checkUserLogin(userName, wrapper) {
     } else {
         loginFunction()
     }
+
 }
 
 export function loginFunction() {
     loginForm.addEventListener('submit', (e) => {
+        likeList = [];
+        bookList = [];
         e.preventDefault();
         userLogged = true;
         location.hash = '';
@@ -65,6 +72,8 @@ export function loginFunction() {
 
 
     hamburgerForm.addEventListener('submit', (e) => {
+        likeList = [];
+        bookList = [];
         e.preventDefault();
         userLogged = true;
         location.hash = '';

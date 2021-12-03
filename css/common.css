@@ -43,7 +43,9 @@ h4{
     margin-bottom: 10px;
 }
 
-
+.hide {
+    display: none;
+}
 
 /* HEAD SECTION */
 header{
@@ -986,6 +988,7 @@ footer {
    padding: 40px;
    color: #414141;
    font-size: 12px;
+   margin-top: 10%;
 }
 
 footer a{

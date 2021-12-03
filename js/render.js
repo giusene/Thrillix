@@ -8,7 +8,7 @@ import { playFunction } from './movie-modal.js';
 import { slideControll } from './domfunctions.js';
 
 export function renderMoviesList(container, data, myList) {
-    if (myList === 'La mia lista' | myList === 'Risulati ricerca') {
+    if (myList === 'La mia lista' || myList === 'Risulati ricerca') {
         const top = document.querySelector(`#top-rated`);
         top.innerHTML = '';
         const topTitle = top.parentNode.querySelector('h3');
@@ -45,37 +45,39 @@ export function renderMoviesList(container, data, myList) {
     wrapper.style.left = '0px'
 
 
-    // sarà stanco per non trovare una soluzione migliore
-    switch(myList) {
-        case 'La mia lista':
-            if (document.querySelector('.forward-btn')) {
-                document.querySelector('.forward-btn').remove();
-                document.querySelector('.backward-btn').remove();
-            }
-            break;
-        case 'Risulati ricerca':
-            if (document.querySelector('.forward-btn')) {
-                document.querySelector('.forward-btn').remove();
-                document.querySelector('.backward-btn').remove();
-            }
-            break;
-        default:
-            const forwardBtn = document.createElement('div');
-            forwardBtn.className = 'forward-btn';
-            forwardBtn.addEventListener('click', (event) => {
-                slideControll(wrapper, 'forward', event);
-            })
-        
-            const backwardBtn = document.createElement('div');
-            backwardBtn.className = 'backward-btn';
-            backwardBtn.addEventListener('click', (event) => {
-                slideControll(wrapper, 'backward', event);
-            })
-        
-            wrapper.parentNode.appendChild(forwardBtn);
-            wrapper.parentNode.appendChild(backwardBtn);
-            break;
+    const forwardBtn = document.createElement('div');
+    forwardBtn.className = 'forward-btn';
+    forwardBtn.addEventListener('click', (event) => {
+        slideControll(wrapper, 'forward', event);
+    })
 
+    const backwardBtn = document.createElement('div');
+    backwardBtn.className = 'backward-btn';
+    backwardBtn.addEventListener('click', (event) => {
+        slideControll(wrapper, 'backward', event);
+    })
+
+    wrapper.parentNode.appendChild(forwardBtn);
+    wrapper.parentNode.appendChild(backwardBtn);
+
+    if (myList === 'La mia lista' || myList === 'Risulati ricerca') {
+        const back = document.querySelectorAll('.backward-btn');
+        const forw = document.querySelectorAll('.forward-btn');
+        back.forEach(item =>{
+            item.classList.add('hide');
+        })
+        forw.forEach(item =>{
+            item.classList.add('hide');
+        })
+    } else {
+        const back = document.querySelectorAll('.backward-btn');
+        const forw = document.querySelectorAll('.forward-btn');
+        back.forEach(item =>{
+            item.classList.remove('hide');
+        })
+        forw.forEach(item =>{
+            item.classList.remove('hide');
+        })
     }
 
     data.forEach(element => {
@@ -137,7 +139,7 @@ export function renderMoviesList(container, data, myList) {
                 buttonBook.classList.toggle('active');
                 bookList.splice(bookList.indexOf(check), 1)
                 if (location.hash === '#lamialista') {
-                    renderMoviesList('popular', bookList, 'La mia lista') 
+                    renderMoviesList('popular', bookList, 'La mia lista')
                 }
             }
             if (userLogged) {
@@ -229,8 +231,8 @@ export function renderMoviesList(container, data, myList) {
 
         const buttonDownArrow = document.createElement('button');
         buttonDownArrow.className = 'button-down-arrow';
-        
-        if (myList === 'Altri titoli simili' || innerWidth > 812 ) {
+
+        if (myList === 'Altri titoli simili' || innerWidth > 812) {
             buttonDownArrow.addEventListener('click', () => {
                 window.scrollTo(0, 0);
                 showModal(element.title, element.id, element.overview, element.adult, element.release_date.split('-', 1)[0], genres, element.backdrop_path, element.poster_path, element.release_date)
@@ -242,7 +244,7 @@ export function renderMoviesList(container, data, myList) {
             })
         }
 
-        
+
 
         movieInfo.appendChild(buttonPlay);
         movieInfo.appendChild(buttonBook);

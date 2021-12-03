@@ -37,6 +37,28 @@ export function hashCangeFunc() {
                 document.querySelector('.list-link').classList.remove('active');
                 document.querySelector('.ham-list-link').classList.remove('active');
                 break;
+            case '#login':
+                document.querySelector('.hamburger-div').classList.remove('show');
+                document.querySelector('.home-link').classList.add('active');
+                document.querySelector('.ham-home-link').classList.add('active');
+                document.querySelector('.list-link').classList.remove('active');
+                document.querySelector('.ham-list-link').classList.remove('active');
+                renderHero(popularMovies);
+                renderMoviesList('popular', popularMovies, 'I più popolari su Thrillix');
+                renderMoviesList('now-playing', nowPlayingMovies, 'I titoli del momento');
+                renderMoviesList('top-rated', topRatedMovies, 'I titoli piu votati');
+                break;
+            case '#logout':
+                document.querySelector('.hamburger-div').classList.remove('show');
+                document.querySelector('.home-link').classList.add('active');
+                document.querySelector('.ham-home-link').classList.add('active');
+                document.querySelector('.list-link').classList.remove('active');
+                document.querySelector('.ham-list-link').classList.remove('active');
+                renderHero(popularMovies);
+                renderMoviesList('popular', popularMovies, 'I più popolari su Thrillix');
+                renderMoviesList('now-playing', nowPlayingMovies, 'I titoli del momento');
+                renderMoviesList('top-rated', topRatedMovies, 'I titoli piu votati');
+                break;
             case '#secret':
                 secretModal()
                 break;
@@ -103,7 +125,7 @@ function secretModal() {
             location.hash = '';
             secretDiv.classList.remove('show');
         }, 8000)
-        
+
     })
 }
 
