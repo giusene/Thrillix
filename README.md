@@ -4,7 +4,8 @@
 ### Features:
 - Catalogo film da API esterne (themoviedb.org)
 - Trailer film selezionato da chiamata a youtube (Google API)
-- Multi utente
+- Film correlati dinamici in base al film selezionato (altra chiamata API)
+- Multi-utente
 - Salvataggio preferiti, like e dislike in Local Storage per singolo utente
 - Responsive
 - Contenuto segreto 👽
