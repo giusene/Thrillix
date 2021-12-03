@@ -120,7 +120,7 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     buttonDislike.className = 'button-dislike';
 
     likeList.forEach((item) => {
-        if (item.userName === user && item.movieId === parseInt(element.id) && item.like === false) {
+        if (item.userName === user && item.movieId === parseInt(movieId) && item.like === false) {
             buttonDislike.classList.add('active');
         }
     })
