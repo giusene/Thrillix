@@ -91,7 +91,9 @@ export function headerScolling() {
 
 function secretModal() {
     const secretDiv = document.querySelector('.secret');
-    secretDiv.innerHTML = "👽  Complimenti hai trovato l'EasterEgg!! 👽";
+    secretDiv.innerHTML = `👽  Complimenti hai trovato l'EasterEgg!! 👽<br>
+    Selezionando la modalità "Netflix" non saranno più visualizzati solamente i Thriller,<br>
+    bensì TUTTI i generi di film<br>`;
     secretDiv.classList.add('show');
     const secretDivSelect = document.createElement('div');
     secretDivSelect.className = 'secret-select';
