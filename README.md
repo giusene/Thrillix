@@ -8,6 +8,6 @@
 - Multi-utente
 - Salvataggio preferiti, like e dislike in Local Storage per singolo utente
 - Responsive
-- Contenuto segreto 👽
+- Contenuto segreto (Easter-Egg) 👽
 
 ### [>>> Live Demo](https://giusene.github.io/Thrillix/)

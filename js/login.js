@@ -1,20 +1,17 @@
-import { popularMovies } from './apis.js';
-import { nowPlayingMovies } from './apis.js';
-import { topRatedMovies } from './apis.js';
-import { renderMoviesList } from './render.js';
-import { renderHero } from './render.js';
+import { popularMovies, nowPlayingMovies, topRatedMovies } from './apis.js';
+import { renderMoviesList, renderHero } from './render.js';
 
-export function checkUserLogin(userName, wrapper) {
+export function checkUserLogin() {
     if (userLogged) {
         location.hash = '#login';
-        wrapper.innerHTML = `Bentornato <a href="#secret">${user}</a>!`;
+        modalLogin.innerHTML = `Bentornato <a href="#secret">${user}</a>!`;
         const logoutBtn = document.createElement('button');
         logoutBtn.textContent = 'logout';
-        wrapper.appendChild(logoutBtn);
+        modalLogin.appendChild(logoutBtn);
         logoutBtn.addEventListener('click', () => {
             location.hash = '#logout';
             userLogged = false;
-            wrapper.innerHTML = `<form id="login">
+            modalLogin.innerHTML = `<form id="login">
             <p>Accedi per salvare i preferiti</p>
             <input type="text" value="FakeUser" required>
             <input type="password" value="fakepassword" required>
@@ -47,6 +44,7 @@ export function checkUserLogin(userName, wrapper) {
 }
 
 export function loginFunction() {
+    const loginForm = document.querySelector('#login');
     loginForm.addEventListener('submit', (e) => {
         likeList = [];
         bookList = [];
@@ -67,10 +65,10 @@ export function loginFunction() {
             window.localStorage.setItem('users', JSON.stringify(usersList));
             window.localStorage.setItem('bookList', JSON.stringify(bookList));
         }
-        checkUserLogin(user, modalLogin);
+        checkUserLogin();
     })
 
-
+    const hamburgerLogin = document.querySelector('.login-hamburger');
     hamburgerForm.addEventListener('submit', (e) => {
         likeList = [];
         bookList = [];
@@ -105,7 +103,6 @@ export let user;
 export let likeList = [];
 export let bookList = [];
 
-const loginForm = document.querySelector('#login');
+
 const hamburgerForm = document.querySelector('#login-hamburger');
 const modalLogin = document.querySelector('.login-modal');
-const hamburgerLogin = document.querySelector('.login-hamburger');

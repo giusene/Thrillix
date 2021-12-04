@@ -1,14 +1,11 @@
 import { moviesGenres } from './apis.js';
-import { userLogged } from './login.js';
-import { user } from './login.js';
-import { likeList } from './login.js';
-import { bookList } from './login.js';
-import { showModal } from './movie-modal.js';
-import { playFunction } from './movie-modal.js';
+import { userLogged, user, likeList, bookList } from './login.js';
+import { showModal, playFunction } from './movie-modal.js';
 import { slideControll } from './domfunctions.js';
+import { secret } from './domfunctions.js';
 
 export function renderMoviesList(container, data, myList) {
-    if (myList === 'La mia lista' || myList === 'Risulati ricerca') {
+    if (myList === 'La mia lista' | myList === 'Risulati ricerca') {
         const top = document.querySelector(`#top-rated`);
         top.innerHTML = '';
         const topTitle = top.parentNode.querySelector('h3');
@@ -35,7 +32,11 @@ export function renderMoviesList(container, data, myList) {
 
     const wrapper = document.querySelector(`#${container}`);
     const sectionTitle = wrapper.parentNode.querySelector('h3');
-    sectionTitle.textContent = myList;
+    if (myList === 'I più popolari su Thrillix' && secret === true){
+        sectionTitle.textContent = 'I piu popolari su Netflix';
+    } else {
+        sectionTitle.textContent = myList; 
+    }
 
     wrapper.innerHTML = '';
     if (data.length < 1) {
@@ -60,7 +61,7 @@ export function renderMoviesList(container, data, myList) {
     wrapper.parentNode.appendChild(forwardBtn);
     wrapper.parentNode.appendChild(backwardBtn);
 
-    if (myList === 'La mia lista' || myList === 'Risulati ricerca') {
+    if (myList === 'La mia lista' | myList === 'Risulati ricerca') {
         const back = document.querySelectorAll('.backward-btn');
         const forw = document.querySelectorAll('.forward-btn');
         back.forEach(item =>{

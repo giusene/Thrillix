@@ -143,6 +143,10 @@ header.display{
     margin-right: 25px;
 }
 
+.header__logo.secret-logo{
+    background-image: url('../img/logo-secret.png');
+}
+
 .header__menu{
     flex-grow: 1;
     list-style: none;
@@ -1012,7 +1016,7 @@ footer img:hover{
 }
 
  .secret {
-     position: absolute;
+     position: fixed;
      top: 0;
      left: 0;
      width: 100%;
@@ -1031,11 +1035,91 @@ footer img:hover{
  }
 
  .secret img{
-     filter: invert();
+     animation-name: loader;
+     animation-iteration-count: infinite;
+     animation-duration: 1s;
+     animation-timing-function: linear;
+}
+
+@keyframes loader {
+    0%{
+        transform: rotate(0deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
+
+.secret .secret-select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.secret .secret-select .netflix,
+.secret .secret-select .thrillix{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 150px;
+    aspect-ratio: 16/9;
+    opacity: 0.2;
+}
+
+.secret .secret-select .netflix{
+    background-image: url('../img/logo-secret.png');
+}
+
+.secret .secret-select .thrillix{
+    background-image: url('../img/logo.png');
+}
+
+.secret .secret-select .netflix.show,
+.secret .secret-select .thrillix.show{
+    opacity: 1;
+}
+
+.secret .secret-select .select-div{
+    position: relative;
+    border: 1px solid #363636;
+    height: 25px;
+    width: 50px;
+    margin: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.secret .secret-select .select-div .select-dot{
+    background-color: #363636;
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    transition: all 0.20s ease;
+}
+
+.secret .secret-select .select-div .select-dot.active{
+    left: 24px;
+}
+
+.secret .go-secret{
+    padding: 5px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #df1600;
+    color: #000;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 
- .secret select{
+.secret select{
      display: block;
      margin: 40px;
      font-size: 20px;

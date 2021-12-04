@@ -1,12 +1,6 @@
-import { popularMovies } from './apis.js';
-import { nowPlayingMovies } from './apis.js';
-import { topRatedMovies } from './apis.js';
-import { renderMoviesList } from './render.js';
-import { renderHero } from './render.js';
+import { popularMovies, nowPlayingMovies, topRatedMovies, moviesGenres, LoadPopular, LoadNowPlaying, LoadTopRated } from './apis.js';
+import { renderMoviesList, renderHero } from './render.js';
 import { bookList } from './login.js';
-import { moviesGenres } from './apis.js';
-import { LoadPopular, LoadNowPlaying, LoadTopRated } from './apis.js';
-
 
 export function hashCangeFunc() {
     window.addEventListener('hashchange', () => {
@@ -97,36 +91,64 @@ export function headerScolling() {
 
 function secretModal() {
     const secretDiv = document.querySelector('.secret');
-    secretDiv.innerHTML = '👽  Complimenti hai trovato un segreto!! 👽<br>Da qui potrai scegliere qualsiasi altro genere';
+    secretDiv.innerHTML = "👽  Complimenti hai trovato l'EasterEgg!! 👽";
     secretDiv.classList.add('show');
-    const select = document.createElement('select');
-    secretDiv.appendChild(select)
-    moviesGenres.genres.forEach(element => {
-        const option = document.createElement('option');
-        option.setAttribute('value', `${element.id}`)
-        option.textContent = `${element.name}`;
-        select.appendChild(option);
-    });
-    document.body.appendChild(secretDiv);
-    select.addEventListener('change', () => {
-        initFilter = parseInt(select.value);
+    const secretDivSelect = document.createElement('div');
+    secretDivSelect.className = 'secret-select';
+
+    const thrillixDiv = document.createElement('div');
+    thrillixDiv.className = 'thrillix';
+    secretDivSelect.appendChild(thrillixDiv);
+    if (!secret) thrillixDiv.classList.add('show');
+
+    const selectDiv = document.createElement('div');
+    selectDiv.className = 'select-div';
+    secretDivSelect.appendChild(selectDiv)
+
+    const selectDot = document.createElement('div');
+    selectDot.className = 'select-dot';
+    selectDiv.appendChild(selectDot);
+    if (secret) selectDot.classList.add('active');
+
+    const netflixDiv = document.createElement('div');
+    netflixDiv.className = 'netflix';
+    secretDivSelect.appendChild(netflixDiv);
+    if (secret) netflixDiv.classList.add('show');
+
+    const goSecret = document.createElement('button');
+    goSecret.textContent = 'vai'
+    goSecret.className = 'go-secret';
+
+    selectDiv.addEventListener('click', () => {
+        selectDot.classList.toggle('active');
+        thrillixDiv.classList.toggle('show');
+        netflixDiv.classList.toggle('show');
+        logo.classList.toggle('secret-logo');
+        if (secret) { secret = false }
+        else { secret = true }
+    })
+
+    goSecret.addEventListener('click', () => {
         popularMovies.length = 0;
         nowPlayingMovies.length = 0;
         topRatedMovies.length = 0;
-        LoadPopular(1);
-        LoadNowPlaying(1);
-        LoadTopRated(1);
+        LoadPopular(1, secret);
+        LoadNowPlaying(10, secret);
+        LoadTopRated(1, secret);
         secretDiv.textContent = '';
         const loader = document.createElement('img');
-        loader.setAttribute('src', './img/loading.gif');
+        loader.setAttribute('src', './img/loading.png');
         secretDiv.appendChild(loader);
-        select.remove()
         setTimeout(() => {
             location.hash = '';
             secretDiv.classList.remove('show');
         }, 8000)
-
     })
+
+    secretDiv.appendChild(secretDivSelect)
+    secretDiv.appendChild(goSecret)
+    document.body.appendChild(secretDiv);
+    
 }
 
 
@@ -138,7 +160,8 @@ export function hamburgerMenu() {
     })
 }
 
-
+export let secret = false;
 export let initFilter = 53;
 const header = document.querySelector('header');
+const logo = document.querySelector('.header__logo')
 

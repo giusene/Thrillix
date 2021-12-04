@@ -1,8 +1,5 @@
 import { renderMoviesList } from './render.js';
-import { userLogged } from './login.js';
-import { user } from './login.js';
-import { likeList } from './login.js';
-import { bookList } from './login.js';
+import { userLogged, user, likeList, bookList} from './login.js';
 
 export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieYear, movieGenres, movieBackdrop_path, moviePoster_path, movieRelease_date) {
 
@@ -163,7 +160,7 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     movieInfoDiv.appendChild(buttonBook);
     movieInfoDiv.appendChild(buttonLike);
     movieInfoDiv.appendChild(buttonDislike);
-
+    
     const info = document.createElement('p');
     info.innerHTML = `${movieYear} <span class="cat">${movieAdult ? 'VM 14' : 'T'}</span>`;
 
