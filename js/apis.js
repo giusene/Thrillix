@@ -1,6 +1,4 @@
 import { renderMoviesList, renderHero } from './render.js';
-import { checkUserLogin } from './login.js';
-import { hashCangeFunc, headerScolling, initFilter, hamburgerMenu } from './domfunctions.js';
 import { searchFunc } from './search.js';
 
 export const loadGenres = () => {
@@ -106,10 +104,7 @@ export const LoadTopRated = (pages, secret) => {
                 LoadTopRated(pages);
             } else {
                 renderMoviesList('top-rated', topRatedMovies, 'I titoli più votati');
-                checkUserLogin();
-                hashCangeFunc();
-                headerScolling();
-                hamburgerMenu();
+
             }
         })
 }
@@ -117,7 +112,7 @@ export const LoadTopRated = (pages, secret) => {
 export let moviesGenres = [];
 const genresList = 'https://api.themoviedb.org/3/genre/movie/list?api_key=d81b4c0951683c467d7125a553aefc87&language=it-IT'
 
-
+let initFilter = 53;
 export let popularMovies = [];
 export let nowPlayingMovies = [];
 export let topRatedMovies = [];

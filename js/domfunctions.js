@@ -163,7 +163,6 @@ export function hamburgerMenu() {
 }
 
 export let secret = false;
-export let initFilter = 53;
 const header = document.querySelector('header');
 const logo = document.querySelector('.header__logo')
 

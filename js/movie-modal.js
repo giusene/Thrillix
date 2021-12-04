@@ -1,5 +1,6 @@
 import { renderMoviesList } from './render.js';
 import { userLogged, user, likeList, bookList} from './login.js';
+import { secret } from './domfunctions.js';
 
 export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieYear, movieGenres, movieBackdrop_path, moviePoster_path, movieRelease_date) {
 
@@ -11,6 +12,11 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
 
     const modalVideo = document.createElement('div');
     modalVideo.className = 'modal-video';
+    if (secret) {
+        modalVideo.classList.add('secret')
+    } else {
+        modalVideo.classList.remove('secret')
+    }
     modalWindow.appendChild(modalVideo);
 
     youtubeSearch(movieTitle, modalVideo);

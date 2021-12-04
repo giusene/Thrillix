@@ -1,7 +1,7 @@
 import { popularMovies, nowPlayingMovies, topRatedMovies } from './apis.js';
 import { renderMoviesList, renderHero } from './render.js';
 
-export function checkUserLogin(wrapper) {
+function checkUserLogin(wrapper) {
     if (userLogged) {
         location.hash = '#login';
         wrapper.innerHTML = `Bentornato <a href="#secret">${user}</a>!`;
@@ -48,7 +48,7 @@ export function checkUserLogin(wrapper) {
         renderMoviesList('now-playing', nowPlayingMovies, 'I titoli del momento');
         renderMoviesList('top-rated', topRatedMovies, 'I titoli piu votati');
     } else {
-        loginFunction()
+        // loginFunction()
     }
 
 }
