@@ -13,9 +13,9 @@ export function showModal(movieTitle, movieId, movieOverview, movieAdult, movieY
     const modalVideo = document.createElement('div');
     modalVideo.className = 'modal-video';
     if (secret) {
-        modalVideo.classList.add('secret')
+        modalVideo.classList.add('secret-modal')
     } else {
-        modalVideo.classList.remove('secret')
+        modalVideo.classList.remove('secret-modal')
     }
     modalWindow.appendChild(modalVideo);
 

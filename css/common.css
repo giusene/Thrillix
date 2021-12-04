@@ -900,6 +900,10 @@ header.display{
     border-top-right-radius: 10px;
 }
 
+.movie-modal .modal-window .modal-video.secret-modal{
+    background-image: url(../img/splash-secret.png);
+}
+
 .movie-modal .modal-window .modal-video::after{
     position: absolute;
     content: '';
