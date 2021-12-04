@@ -1,13 +1,7 @@
-import { renderMoviesList } from './render.js';
-import { renderHero } from './render.js';
+import { renderMoviesList, renderHero } from './render.js';
 import { checkUserLogin } from './login.js';
-import { hashCangeFunc } from './domfunctions.js';
+import { hashCangeFunc, headerScolling, initFilter, hamburgerMenu } from './domfunctions.js';
 import { searchFunc } from './search.js';
-import { headerScolling } from './domfunctions.js';
-import { initFilter } from './domfunctions.js';
-import { hamburgerMenu } from './domfunctions.js';
-
-
 
 export const loadGenres = () => {
     fetch(genresList)
@@ -22,13 +16,13 @@ export const loadGenres = () => {
         .then((data) => {
             moviesGenres = data;
             LoadPopular(1);
-            LoadNowPlaying(1);
+            LoadNowPlaying(10);
             LoadTopRated(1);
         })
 }
 
-export const LoadPopular = (pages) => {
-    fetch(popularAPI+pages)
+export const LoadPopular = (pages, secret) => {
+    fetch(popularAPI + pages)
         .then((response) => {
             if (response.status === 404) {
                 console.error('errore!!!');
@@ -38,24 +32,28 @@ export const LoadPopular = (pages) => {
             }
         })
         .then((data) => {
-            data.results.filter((movie) => {
-                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === initFilter).length > 0) {
-                    popularMovies.push(movie);
-                }
-            })
+            if (secret) {
+                popularMovies = data.results;
+            } else {
+                data.results.filter((movie) => {
+                    if ([...movie.genre_ids].filter((movieGenId) => movieGenId === initFilter).length > 0) {
+                        popularMovies.push(movie);
+                    }
+                })
+            }
             if (popularMovies.length < 20) {
                 pages++;
                 LoadPopular(pages);
             } else {
-                renderMoviesList('popular', popularMovies, 'I piu popolari su Thrillix');
+                renderMoviesList('popular', popularMovies, 'I più popolari su Thrillix');
                 renderHero(popularMovies);
                 searchFunc(popularMovies);
             }
         })
 }
 
-export const LoadNowPlaying = (pages) => {
-    fetch(nowPlayingAPI+pages)
+export const LoadNowPlaying = (pages, secret) => {
+    fetch(nowPlayingAPI + pages)
         .then((response) => {
             if (response.status === 404) {
                 console.error('errore!!!');
@@ -65,11 +63,15 @@ export const LoadNowPlaying = (pages) => {
             }
         })
         .then((data) => {
-            data.results.filter((movie) => {
-                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === initFilter).length > 0) {
-                    nowPlayingMovies.push(movie);
-                }
-            })
+            if (secret) {
+                nowPlayingMovies = data.results;
+            } else {
+                data.results.filter((movie) => {
+                    if ([...movie.genre_ids].filter((movieGenId) => movieGenId === initFilter).length > 0) {
+                        nowPlayingMovies.push(movie);
+                    }
+                })
+            }
             if (nowPlayingMovies.length < 20) {
                 pages++;
                 LoadNowPlaying(pages);
@@ -79,8 +81,8 @@ export const LoadNowPlaying = (pages) => {
         })
 }
 
-export const LoadTopRated = (pages) => {
-    fetch(topRatedAPI+pages)
+export const LoadTopRated = (pages, secret) => {
+    fetch(topRatedAPI + pages)
         .then((response) => {
             if (response.status === 404) {
                 console.error('errore!!!');
@@ -90,11 +92,15 @@ export const LoadTopRated = (pages) => {
             }
         })
         .then((data) => {
-            data.results.filter((movie) => {
-                if ([...movie.genre_ids].filter((movieGenId) => movieGenId === initFilter).length > 0) {
-                    topRatedMovies.push(movie);
-                }
-            })
+            if (secret) {
+                topRatedMovies = data.results;
+            } else {
+                data.results.filter((movie) => {
+                    if ([...movie.genre_ids].filter((movieGenId) => movieGenId === initFilter).length > 0) {
+                        topRatedMovies.push(movie);
+                    }
+                })
+            }
             if (topRatedMovies.length < 20) {
                 pages++;
                 LoadTopRated(pages);
