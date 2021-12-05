@@ -54,6 +54,7 @@ export function hashCangeFunc() {
                 renderMoviesList('top-rated', topRatedMovies, 'I titoli piu votati');
                 break;
             case '#secret':
+                document.querySelector('.hamburger-div').classList.remove('show');
                 secretModal()
                 break;
         }
@@ -135,7 +136,7 @@ function secretModal() {
         nowPlayingMovies.length = 0;
         topRatedMovies.length = 0;
         LoadPopular(1, secret);
-        LoadNowPlaying(10, secret);
+        LoadNowPlaying(2, secret);
         LoadTopRated(1, secret);
         secretDiv.textContent = '';
         const loader = document.createElement('img');
